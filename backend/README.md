@@ -22,6 +22,13 @@ DATABASE_URL="postgresql://<USER>:<PASSWORD>@<HOST>:<PORT>/<TEST_DATABASE>"
 npm i
 ```
 
+### Run migrations:
+```shell
+npm run migrate:dev
+
+npm run migrate:test
+```
+
 ### Startup:
 ```shell
 npm run start:prod # - start in production
