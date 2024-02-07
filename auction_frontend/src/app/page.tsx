@@ -1,7 +1,13 @@
+import BackgroundDecals from "@/components/BackgroundDecals/BackgroundDecals";
+import homeList from "@/decalLists/home";
+
 const Home = () => {
     return (
-        <main>
-        </main>
+        <>
+            <BackgroundDecals
+                {...homeList}
+            />
+        </>
     );
 };
 
