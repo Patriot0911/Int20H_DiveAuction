@@ -1,0 +1,22 @@
+.profile {
+    background: linear-gradient(
+        #3B0C1D,
+        #571717
+    );
+    width: 45px;
+    height: 45px;
+    flex: 0 0 auto;
+    border-radius: 22.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid rgba(245, 245, 245, 0.413);
+    padding: 1px;
+}
+.profile :hover {
+    cursor: pointer;
+}
+.profile-img-container {
+    height: 90%;
+}

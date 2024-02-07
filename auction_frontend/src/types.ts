@@ -30,3 +30,8 @@ export interface IFormFieldsProps extends HTMLAttributes<HTMLInputElement> {
 };
 
 export type TFormSubmitButtonProps = HTMLAttributes<HTMLButtonElement> & IComponentChildrenProp;
+
+export interface INavButtonProps {
+    path: string;
+    component: ReactNode;
+};

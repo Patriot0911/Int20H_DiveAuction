@@ -1,0 +1,31 @@
+.search-box {
+    padding: 0 20px ;
+    font-size: 20px;
+    color: white;
+    border: 1px solid #fff;
+    display: flex;
+    align-items: center;
+    border-radius: 23px;
+    background: rgba(127, 113, 113, 0.2);
+    height: 100%;
+    transition: 0.5s;
+    justify-content: space-between;
+}
+.search-box:hover {
+    transition: 0.2s;
+    background: rgba(141, 122, 122, 0.499);
+}
+.search-input {
+    font-size: inherit;
+    color: inherit;
+    flex: 1 1 auto;
+    background: none;
+    border: none;
+    outline: none;
+}
+.search-input::placeholder {
+    color: rgba(240, 248, 255, 0.664);
+}
+.search-button {
+    cursor: pointer;
+}
