@@ -5,11 +5,11 @@ import Header from "./Header/Header";
 const Layouts = ({ children }: IComponentChildrenProp) => {
     return (
         <body>
-        <main>
-            <Header />
-            {children}
-            <Footer />
-        </main>
+            <main>
+                <Header />
+                {children}
+                <Footer />
+            </main>
         </body>
     );
 };

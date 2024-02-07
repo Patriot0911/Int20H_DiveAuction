@@ -4,6 +4,7 @@ import { FaHome } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
+
 const Header = () => {
     return (
         <header className="header">
@@ -23,17 +24,6 @@ const Header = () => {
             </div>
             <div className="right-column">
                 <div className="navbar">
-                    {/*<ul>*/}
-                    {/*    <li>*/}
-                    {/*        */}
-                    {/*    </li>*/}
-                    {/*    <li>*/}
-                    {/*        */}
-                    {/*    </li>*/}
-                    {/*    <li>*/}
-
-                    {/*    </li>*/}
-                    {/*</ul>*/}
                     <a href="#">
                         <div className="icon-wrapper">
                             <FaUserGroup size="35px"/>
