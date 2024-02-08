@@ -2,23 +2,22 @@
     color: aliceblue;
     font-size: 18px;
 }
-
 body {
     padding: 0;
     margin: 0;
+}
+main {
     background: linear-gradient(
         to right bottom,
         #47284a,
         #402343,
         #301D1D
     );
-}
-
-main {
     min-height: 100dvh;
-    max-width: 100dvw;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 @keyframes logreg-container-apear {

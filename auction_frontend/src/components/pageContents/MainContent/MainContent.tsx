@@ -5,39 +5,6 @@ const MainContent = () => {
         <div
             className={'main-page-container'}
         >
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
-            <p>ss</p>
         </div>
     );
 };
