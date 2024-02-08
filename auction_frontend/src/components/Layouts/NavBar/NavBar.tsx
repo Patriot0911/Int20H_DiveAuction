@@ -3,29 +3,30 @@ import { FaHeart, FaHome } from 'react-icons/fa';
 import { INavButtonProps } from '@/types';
 import NavButton from '@/components/ui/NavButton/NavButton';
 import './NavBar.css';
+import { MdOutlineWallet } from 'react-icons/md';
 
 const componentProps = {
     size: '35px'
 };
 const navList: INavButtonProps[] = [
     {
-        path: '#',
-        component:
-        <FaUserGroup
-            {...componentProps}
-        />
-    },
-    {
-        path: '#',
-        component:
-        <FaHeart
-            {...componentProps}
-        />
-    },
-    {
-        path: '#',
+        path: '/',
         component:
         <FaHome
+            {...componentProps}
+        />
+    },
+    {
+        path: '/my-auctions',
+        component:
+        <MdOutlineWallet
+            {...componentProps}
+        />
+    },
+    {
+        path: '/fav',
+        component:
+        <FaHeart
             {...componentProps}
         />
     }

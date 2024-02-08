@@ -3,9 +3,10 @@ import { FormEvent, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { IoMailUnread } from "react-icons/io5";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { ISignUpInputFieldSettings } from "@/types";
 import FormField from "../ui/FormField/FormField";
-import FormSubmitButton from "../ui/FormSubmitButton/FormSubmitButton";
-import Link from "next/link";
+import HasAccountInfo from "./HasAccountInfo";
+import SignUpButtons from "./SignUpButtons";
 import './SignUpForm.css';
 
 const iconProps = {
@@ -17,17 +18,19 @@ const SignUpForm = () => {
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-
     const submitHandle = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         console.log(1);
     };
+    const googleAuthHandle = () => {
 
-    const inputFields = [
+    };
+
+    const inputFields: ISignUpInputFieldSettings[] = [
         {
             name:           'userName',
             placeholder:    'Ім\'я Користувача',
-            required: true,
+            required:       true,
             iconComponent:
             <FaUserCircle
                 {...iconProps}
@@ -37,7 +40,7 @@ const SignUpForm = () => {
             name:           'email',
             placeholder:    'Пошта',
             type:           'email',
-            required: true,
+            required:       true,
             iconComponent:
             <IoMailUnread
                 {...iconProps}
@@ -47,7 +50,7 @@ const SignUpForm = () => {
             name:           'password',
             placeholder:    'Пароль',
             type:           'password',
-            required: true,
+            required:       true,
             iconComponent:
             <RiLockPasswordFill
                 {...iconProps}
@@ -68,20 +71,10 @@ const SignUpForm = () => {
                     />
                 )
             }
-            <div
-                className={'has-account-info'}
-            >
-                Вже маєте акаунт?
-                <br />
-                <Link
-                    href={'/login'}
-                >
-                    Увійти
-                </Link>
-            </div>
-            <FormSubmitButton>
-                Створити
-            </FormSubmitButton>
+            <HasAccountInfo />
+            <SignUpButtons
+                googleHandle={googleAuthHandle}
+            />
         </form>
     );
 };

@@ -4,11 +4,11 @@ export const metadata: Metadata = {
     title: 'Auction Dive | My Lots'
 };
 
-const MyAuctions = () => {
+const MyAuctionsPage = () => {
     return (
         <>
         </>
     );
 };
 
-export default MyAuctions;
+export default MyAuctionsPage;

@@ -1,4 +1,4 @@
-import { HTMLAttributes, HTMLInputTypeAttribute, ReactNode } from "react";
+import { ButtonHTMLAttributes, HTMLAttributes, HTMLInputTypeAttribute, InputHTMLAttributes, ReactNode } from "react";
 
 export type TRooutLayoutProps = Readonly<IComponentChildrenProp>;
 
@@ -15,7 +15,7 @@ export interface INavBarButtonProps {
 export interface ICircleProps {
     color: string;
     size: string;
-    blurSize: string;
+    blursize: string;
     opacity?: number;
     classname?: string;
     left?: string;
@@ -25,13 +25,21 @@ export interface IBackgroundDecalsProps {
     circles?: ICircleProps[];
 };
 
-export interface IFormFieldsProps extends HTMLAttributes<HTMLInputElement> {
+export interface IFormFieldsProps extends InputHTMLAttributes<HTMLInputElement> {
     iconComponent: ReactNode;
 };
 
-export type TFormSubmitButtonProps = HTMLAttributes<HTMLButtonElement> & IComponentChildrenProp;
+export type TFormSubmitButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & IComponentChildrenProp;
 
 export interface INavButtonProps {
     path: string;
     component: ReactNode;
+};
+
+export interface ISignUpInputFieldSettings extends IFormFieldsProps {
+    name: string;
+};
+
+export interface ISignUpButtonsProps {
+    googleHandle: () => void;
 };

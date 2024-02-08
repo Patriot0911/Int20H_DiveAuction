@@ -5,11 +5,11 @@ export const metadata: Metadata = {
 };
 
 
-const LogIn = () => {
+const LogInPage = () => {
     return (
         <>
         </>
     );
 };
 
-export default LogIn;
+export default LogInPage;

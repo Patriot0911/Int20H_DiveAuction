@@ -1,0 +1,13 @@
+.bg-decal-circle {
+    animation: animate-circle-apear 1.6s normal;
+}
+
+@keyframes animate-circle-apear {
+    0% {
+        transform: translateY(-50px) scale(0.6);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
