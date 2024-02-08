@@ -34,7 +34,6 @@ export class UploadInterceptor implements NestInterceptor {
   private readonly uploadTimeout: number;
   private readonly uploadedField: string;
   private index: number = 0;
-  private files: string[];
 
   constructor(options: Options) {
     const dirPath = join(UPLOAD_DIR, options.dir);
@@ -50,7 +49,6 @@ export class UploadInterceptor implements NestInterceptor {
     this.uploadTimeout = options.uploadTimeout ?? UPLOAD_TIMEOUT;
     this.uploadedField = options.uploadedField ?? UPLOADED_FIELD;
     this.dirPath = dirPath;
-    this.files = [];
   }
 
   normalizeFilename(filename: string): string {
@@ -62,7 +60,7 @@ export class UploadInterceptor implements NestInterceptor {
     return `${this.index++}-${normalized}${extname(filename)}`;
   }
 
-  async upload(part: MultipartFile): Promise<void> {
+  async upload(part: MultipartFile, files: string[]): Promise<void> {
     const { mimetype, filename } = part;
     if (!this.mimeTypes.includes(mimetype))
       throw new BadRequestException(
@@ -74,7 +72,7 @@ export class UploadInterceptor implements NestInterceptor {
       await pipeline(part.file, fs.createWriteStream(filePath), {
         signal: AbortSignal.timeout(this.uploadTimeout ?? UPLOAD_TIMEOUT),
       });
-      this.files.push(filePath);
+      files.push(filePath);
     } catch (err) {
       throw new BadRequestException(
         err.name === 'AbortError'
@@ -84,7 +82,7 @@ export class UploadInterceptor implements NestInterceptor {
     }
   }
 
-  async process(req: FastifyRequest) {
+  async process(req: FastifyRequest, files: string[]) {
     req.body = {} as { [key: string]: unknown };
     const parts = req.parts();
     let uploadedFiles = 0;
@@ -92,7 +90,7 @@ export class UploadInterceptor implements NestInterceptor {
       if (part.type === 'file') {
         if (++uploadedFiles > this.maxUploadedFiles)
           throw new BadRequestException(`Exceeded max uploaded files limit`);
-        else await this.upload(part);
+        else await this.upload(part, files);
         continue;
       }
       try {
@@ -103,7 +101,7 @@ export class UploadInterceptor implements NestInterceptor {
         );
       }
     }
-    req.body[this.uploadedField] = this.files;
+    req.body[this.uploadedField] = files;
   }
 
   async intercept(
@@ -111,14 +109,11 @@ export class UploadInterceptor implements NestInterceptor {
     handler: CallHandler<any>,
   ): Promise<Observable<any>> {
     const req = ctx.switchToHttp().getRequest();
+    const files = [];
     try {
-      await this.process(req);
-      this.files = [];
+      await this.process(req, files);
     } catch (err) {
-      Promise.all(this.files.map((file) => fs.promises.unlink(file))).catch(
-        NOOP,
-      );
-      this.files = [];
+      Promise.all(files.map((file) => fs.promises.unlink(file))).catch(NOOP);
       throw err;
     }
     return handler.handle();
