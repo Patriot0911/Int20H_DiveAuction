@@ -20,10 +20,14 @@ import { UserSerializationDto } from '../dtos/user.dto';
 import type { FastifySessionObject } from '@fastify/session';
 import type { Profile } from '../interfaces/profile.interface';
 import type { FastifyReply } from 'fastify';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('/auth')
 export class AuthController {
-  constructor(private readonly service: AuthService) {}
+  constructor(
+    private readonly service: AuthService,
+    private readonly config: ConfigService,
+  ) {}
 
   @Post('/signup')
   @HttpCode(201)
@@ -64,9 +68,9 @@ export class AuthController {
   async googleOAuthCb(
     @Req() req: { user: Profile; session: FastifySessionObject },
     @Res() res: FastifyReply,
-  ): Promise<void> {
+  ) {
     const user = await this.service.useGoogleOAuth(req.user);
     if (user) this.service.startSession(req.session, user);
-    res.redirect(302, '/');
+    res.redirect(302, this.config.get<string>('OAuth.redirectURL'));
   }
 }
