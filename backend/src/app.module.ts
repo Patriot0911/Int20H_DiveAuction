@@ -2,6 +2,9 @@ import { APP_PIPE } from '@nestjs/core';
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DbModule } from './modules/db/db.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { SessionStore } from './common/session-store';
+import { sessionConfig, OAuthConfig } from './config';
 
 @Module({
   imports: [
@@ -10,8 +13,9 @@ import { DbModule } from './modules/db/db.module';
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
       ignoreEnvFile: process.env.NODE_ENV === 'production',
-      load: [],
+      load: [sessionConfig, OAuthConfig],
     }),
+    AuthModule,
   ],
   controllers: [],
   providers: [
@@ -21,6 +25,7 @@ import { DbModule } from './modules/db/db.module';
         whitelist: true,
       }),
     },
+    SessionStore,
   ],
 })
 export class AppModule {}
