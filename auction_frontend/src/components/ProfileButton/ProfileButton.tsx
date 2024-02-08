@@ -1,4 +1,4 @@
-import { FaUser } from 'react-icons/fa';
+import { FaUserSecret } from 'react-icons/fa';
 import './ProfileButton.css';
 
 const ProfileButton = () => {
@@ -9,9 +9,9 @@ const ProfileButton = () => {
             <div
                 className={'profile-img-container'}
             >
-                <FaUser
-                    size={'45px'}
-                    color={'#ffff'}
+                <FaUserSecret
+                    size={'50px'}
+                    color={'#fdebff'}
                 />
             </div>
         </a>

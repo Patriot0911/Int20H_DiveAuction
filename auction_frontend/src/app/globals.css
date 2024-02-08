@@ -20,7 +20,7 @@ main {
     position: relative;
 }
 
-@keyframes logreg-container-apear {
+@keyframes classic-container-apear {
     0% {
         transform: translateY(50px);
         opacity: 0;
