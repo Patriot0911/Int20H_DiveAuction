@@ -1,4 +1,5 @@
 import * as fs from 'node:fs';
+import { randomBytes } from 'node:crypto';
 import { join, extname } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import {
@@ -24,8 +25,8 @@ interface Options {
 const NOOP = () => {};
 const UPLOAD_DIR = join(process.cwd(), '/public/uploaded');
 const UPLOAD_TIMEOUT = 5000;
+const UNIQUE_HASH_LENGTH = 5;
 const UPLOADED_FIELD = 'uploaded';
-const MAX_FILENAME_LENGTH = 50;
 
 export class UploadInterceptor implements NestInterceptor {
   private readonly dirPath: string;
@@ -33,12 +34,11 @@ export class UploadInterceptor implements NestInterceptor {
   private readonly maxUploadedFiles: number;
   private readonly uploadTimeout: number;
   private readonly uploadedField: string;
-  private index: number = 0;
 
   constructor(options: Options) {
     const dirPath = join(UPLOAD_DIR, options.dir);
     try {
-      this.index = fs.readdirSync(dirPath).length;
+      fs.accessSync(dirPath, fs.constants.W_OK);
     } catch (err) {
       if (err.code === 'ENOENT' && options.mkdir)
         fs.mkdirSync(dirPath, { recursive: true });
@@ -51,23 +51,18 @@ export class UploadInterceptor implements NestInterceptor {
     this.dirPath = dirPath;
   }
 
-  normalizeFilename(filename: string): string {
-    const length = Math.min(filename.lastIndexOf('.'), MAX_FILENAME_LENGTH);
-    const normalized = filename
-      .slice(0, length)
-      .replace(/[^a-z0-9.]/gi, '_')
-      .toLowerCase();
-    return `${this.index++}-${normalized}${extname(filename)}`;
-  }
-
-  async upload(part: MultipartFile, files: string[]): Promise<void> {
+  async upload(
+    part: MultipartFile,
+    hash: string,
+    files: string[],
+  ): Promise<void> {
     const { mimetype, filename } = part;
     if (!this.mimeTypes.includes(mimetype))
       throw new BadRequestException(
         `Invalid file type ${mimetype} of ${filename}`,
       );
-    const normalized = this.normalizeFilename(filename);
-    const filePath = join(this.dirPath, normalized);
+    const ext = extname(filename);
+    const filePath = join(this.dirPath, `${Date.now()}-${hash}${ext}`);
     try {
       await pipeline(part.file, fs.createWriteStream(filePath), {
         signal: AbortSignal.timeout(this.uploadTimeout ?? UPLOAD_TIMEOUT),
@@ -82,7 +77,7 @@ export class UploadInterceptor implements NestInterceptor {
     }
   }
 
-  async process(req: FastifyRequest, files: string[]) {
+  async process(req: FastifyRequest, hash: string, files: string[]) {
     req.body = {} as { [key: string]: unknown };
     const parts = req.parts();
     let uploadedFiles = 0;
@@ -90,7 +85,7 @@ export class UploadInterceptor implements NestInterceptor {
       if (part.type === 'file') {
         if (++uploadedFiles > this.maxUploadedFiles)
           throw new BadRequestException(`Exceeded max uploaded files limit`);
-        else await this.upload(part, files);
+        else await this.upload(part, hash, files);
         continue;
       }
       try {
@@ -109,9 +104,10 @@ export class UploadInterceptor implements NestInterceptor {
     handler: CallHandler<any>,
   ): Promise<Observable<any>> {
     const req = ctx.switchToHttp().getRequest();
+    const hash = randomBytes(UNIQUE_HASH_LENGTH).toString('hex');
     const files = [];
     try {
-      await this.process(req, files);
+      await this.process(req, hash, files);
     } catch (err) {
       Promise.all(files.map((file) => fs.promises.unlink(file))).catch(NOOP);
       throw err;
