@@ -11,10 +11,26 @@
 # Database
 DATABASE_URL="postgresql://<USER>:<PASSWORD>@<HOST>:<PORT>/<DEV_DATABASE>"
 
+# Session
+SESSION_SECRET="<MIN_32_BIT_TOKEN>"
+
+# OAuth2
+GOOGLE_CLIENT_ID="<KEY>"
+GOOGLE_CLIENT_SECRET="<SECRET>"
+GOOGLE_CALLBACK_URL="<PROTOCOL>://<HOST>:<PORT>/api/auth/callback/google"
+
 # .env.test
 
 # Database
 DATABASE_URL="postgresql://<USER>:<PASSWORD>@<HOST>:<PORT>/<TEST_DATABASE>"
+
+# Session
+SESSION_SECRET="<MIN_32_BIT_TOKEN>"
+
+# OAuth2
+GOOGLE_CLIENT_ID="<KEY>"
+GOOGLE_CLIENT_SECRET="<SECRET>"
+GOOGLE_CALLBACK_URL="<PROTOCOL>://<HOST>:<PORT>/api/auth/callback/google"
 ```
 
 ### Installing dependencies:
