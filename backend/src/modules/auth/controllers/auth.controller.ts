@@ -11,6 +11,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
+import { ConfigService } from '@nestjs/config';
 import { Serialize } from 'src/common/interceptors/serialize.interceptor';
 import { AuthGuard } from '@nestjs/passport';
 import { Authorized } from 'src/common/guards/auth.guard';
@@ -20,7 +21,6 @@ import { UserSerializationDto } from '../dtos/user.dto';
 import type { FastifySessionObject } from '@fastify/session';
 import type { Profile } from '../interfaces/profile.interface';
 import type { FastifyReply } from 'fastify';
-import { ConfigService } from '@nestjs/config';
 
 @Controller('/auth')
 export class AuthController {
