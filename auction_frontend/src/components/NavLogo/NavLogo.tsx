@@ -1,11 +1,6 @@
+import { lemonFont } from '@/scripts/fonts';
 import Link from 'next/link';
 import './NavLogo.css';
-import { Lemon } from 'next/font/google';
-
-const logoFont = Lemon({
-    weight: '400',
-    subsets: ['latin']
-});
 
 const NavLogo = () => {
     return (
@@ -14,7 +9,7 @@ const NavLogo = () => {
             className={'logo-back'}
         >
             <div
-                className={`logo ${logoFont.className}`}
+                className={`logo ${lemonFont.className}`}
             >
                 AUCTION
                 <span

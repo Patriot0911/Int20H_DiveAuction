@@ -1,22 +1,19 @@
 
-import SignUpForm from '@/components/SignUpForm/SignUpForm';
-import { Lobster } from 'next/font/google';
+import AuthForm from '@/components/AuthForm/AuthForm';
+import { lobsterFont } from '@/scripts/fonts';
 import './signup.css';
-
-const lobster = Lobster({
-    subsets: ['latin'],
-    weight: '400'
-});
 
 const SignUpContent = () => {
     return (
         <section
             className={
-                `signup-container ${lobster.className}`
+                `signup-container ${lobsterFont.className}`
             }
         >
             <h2>Реєстрація</h2>
-            <SignUpForm />
+            <AuthForm
+                register={true}
+            />
         </section>
     );
 };

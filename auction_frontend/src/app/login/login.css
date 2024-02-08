@@ -1,8 +1,8 @@
-.signup-container {
+.login-container {
     background: linear-gradient(
-        to right,
-        #7325509c,
-        rgba(62, 33, 97, 0.713)
+        to Left top,
+        #9a29679c,
+        rgba(79, 53, 111, 0.713)
     );
     border-radius: 10px;
     box-shadow: rgba(32, 12, 30, 0.313) 0px 10px 15px 5px;
@@ -14,8 +14,10 @@
     align-items: center;
     animation: logreg-container-apear 1s normal;
 }
-.signup-container h2 {
+.login-container h2 {
     letter-spacing: 4px;
     font-size: 40px;
     user-select: none;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }

@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, HTMLAttributes, HTMLInputTypeAttribute, InputHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 
 export type TRooutLayoutProps = Readonly<IComponentChildrenProp>;
 
@@ -36,10 +36,17 @@ export interface INavButtonProps {
     component: ReactNode;
 };
 
-export interface ISignUpInputFieldSettings extends IFormFieldsProps {
+export interface IAuthUpInputFieldSettings extends IFormFieldsProps {
     name: string;
+    isloginform?: 1 | 0;
 };
 
-export interface ISignUpButtonsProps {
+export interface IAuthUpButtonsProps extends IAuthFormProps{
     googleHandle: () => void;
 };
+
+export interface IAuthFormProps {
+    register?: boolean;
+};
+
+export type THasAccountInfoProps = IAuthFormProps;

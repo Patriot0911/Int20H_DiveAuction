@@ -1,7 +1,6 @@
 import { TFormSubmitButtonProps } from '@/types';
 import './FormSubmitButton.css';
 
-
 const FormSubmitButton = ({ children, ...props }: TFormSubmitButtonProps) => {
     return (
         <button
