@@ -1,4 +1,6 @@
+
 .profile {
+    --profile-size: 50px;
     background: linear-gradient(
         #2b141c,
         #791d44
