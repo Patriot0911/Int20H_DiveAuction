@@ -62,10 +62,13 @@ export class UploadInterceptor implements NestInterceptor {
         `Invalid file type ${mimetype} of ${filename}`,
       );
     const ext = extname(filename);
-    const filePath = join(this.dirPath, `${Date.now()}-${hash}${ext}`);
+    const filePath = join(
+      this.dirPath,
+      `${Date.now()}-${files.length}-${hash}${ext}`,
+    );
     try {
       await pipeline(part.file, fs.createWriteStream(filePath), {
-        signal: AbortSignal.timeout(this.uploadTimeout ?? UPLOAD_TIMEOUT),
+        signal: AbortSignal.timeout(this.uploadTimeout),
       });
       files.push(filePath);
     } catch (err) {

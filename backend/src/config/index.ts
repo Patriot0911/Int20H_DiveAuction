@@ -1,4 +1,5 @@
+import serverConfig from './server';
 import sessionConfig from './session';
 import OAuthConfig from './oauth';
 
-export { sessionConfig, OAuthConfig };
+export { serverConfig, sessionConfig, OAuthConfig };
