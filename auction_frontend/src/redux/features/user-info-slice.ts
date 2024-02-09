@@ -1,4 +1,4 @@
-import { IProfileInfo } from "@/types";
+import { IProfileData, IProfileInfo } from "@/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface IInitialState {
@@ -15,10 +15,10 @@ export const userInfo = createSlice({
     name: 'userInfo',
     initialState,
     reducers: {
-        authUser: (state, actions: PayloadAction<IProfileInfo>) => ({
+        authUser: (state, actions: PayloadAction<IProfileData>) => ({
             value: {
                 isAuth: true,
-                data: actions.payload.data
+                data: actions.payload
             }
         }),
         logOutUser: () => initialState

@@ -2,8 +2,8 @@ import formPhrases from "@/scripts/formPhrases";
 import { THasAccountInfoProps } from "@/types";
 import Link from "next/link";
 
-const HasAccountInfo = ({ register }: THasAccountInfoProps) => {
-    const formInfo = formPhrases[register ? 0 : 1];
+const HasAccountInfo = ({ formtype }: THasAccountInfoProps) => {
+    const formInfo = formPhrases[formtype];
     return (
         <div
             className={'has-account-info'}

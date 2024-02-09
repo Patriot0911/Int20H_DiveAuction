@@ -63,10 +63,3 @@
     display: flex;
     animation: popup-apear 0.4s normal;
 }
-
-@keyframes popup-apear {
-    0% {
-        transform: translateY(10px);
-        opacity: 0;
-    }
-}

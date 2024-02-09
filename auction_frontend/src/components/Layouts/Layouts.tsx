@@ -5,7 +5,9 @@ import Header from "./Header/Header";
 const Layouts = ({ children }: IComponentChildrenProp) => {
     return (
         <body>
-            <main>
+            <main
+                id={'main-wrapper-id'}
+            >
                 <Header />
                 {children}
                 <Footer />

@@ -1,6 +1,8 @@
 import AuthForm from '@/components/AuthForm/AuthForm';
 import { lobsterFont } from '@/scripts/fonts';
+import { AuthActionsTypes } from '@/types';
 import './login.css';
+import ReduxProvider from '@/redux/provider';
 
 const LogInContent = () => {
     return (
@@ -10,7 +12,11 @@ const LogInContent = () => {
             }
         >
             <h2>Авторизація</h2>
-            <AuthForm />
+            <ReduxProvider>
+                <AuthForm
+                    formtype={AuthActionsTypes.SignIn}
+                />
+            </ReduxProvider>
         </section>
     );
 };

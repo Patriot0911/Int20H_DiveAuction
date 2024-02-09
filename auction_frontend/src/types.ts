@@ -1,5 +1,14 @@
 import { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 
+export enum AuthPathes {
+    SignIn = '/signin',
+    SignUp = '/signup'
+};
+export enum AuthActionsTypes {
+    SignIn = 1,
+    SignUp = 0
+};
+
 export type TRooutLayoutProps = Readonly<IComponentChildrenProp>;
 
 export interface IComponentChildrenProp {
@@ -36,9 +45,11 @@ export interface INavButtonProps {
     component: ReactNode;
 };
 
+type TFormType = AuthActionsTypes.SignIn | AuthActionsTypes.SignUp;
+
 export interface IAuthUpInputFieldSettings extends IFormFieldsProps {
     name: string;
-    isloginform?: 1 | 0;
+    formtype: TFormType;
 };
 
 export interface IAuthUpButtonsProps extends IAuthFormProps{
@@ -46,7 +57,7 @@ export interface IAuthUpButtonsProps extends IAuthFormProps{
 };
 
 export interface IAuthFormProps {
-    register?: boolean;
+    formtype: TFormType;
 };
 
 export type THasAccountInfoProps = IAuthFormProps;
@@ -59,12 +70,14 @@ export interface IFooterTextsProps extends IComponentChildrenProp {
 
 export interface IProfileInfo {
     isAuth: boolean;
-    data?: {
-        id: number;
-        name: string;
-        avatar: string;
-        email: string;
-    }
+    data?: IProfileData;
+};
+export interface IProfileData {
+    id: number;
+    name: string;
+    photo: string;
+    email: string;
+    verified: boolean;
 };
 
 export interface INavBarListItem extends INavButtonProps {
@@ -78,4 +91,30 @@ export interface ILotItemProps {
     createdAt: Date | string;
     price: number;
     isFav?: boolean;
+};
+
+export interface ICreateProfileSetup {
+    name?: string;
+    email: string;
+    password: string;
+};
+
+interface IAuthActionCallBackResponse {
+    status: number;
+    message: string | IProfileData;
+};
+
+type TAuthActionCallBack = (userInfo: ICreateProfileSetup) => Promise<IAuthActionCallBackResponse>;
+
+export type TAuthActions = {
+    [key in AuthActionsTypes]: TAuthActionCallBack;
+}
+
+export interface IAuthErrorField {
+    errorMessage?: string;
+};
+
+export interface IAuthPopUpContainerProps {
+    errorMsg: string;
+    closeHandle: () => void;
 };
