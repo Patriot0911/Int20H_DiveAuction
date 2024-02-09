@@ -4,6 +4,8 @@ import { ConfigModule } from '@nestjs/config';
 import { DbModule } from './modules/db/db.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
+import { AuctionsModule } from './modules/auctions/auctions.module';
+import { BidsModule } from './modules/bids/bids.module';
 import { SessionStore } from './common/session-store';
 import { serverConfig, sessionConfig, OAuthConfig } from './config';
 
@@ -17,7 +19,9 @@ import { serverConfig, sessionConfig, OAuthConfig } from './config';
       load: [serverConfig, sessionConfig, OAuthConfig],
     }),
     AuthModule,
+    AuctionsModule,
     UsersModule,
+    BidsModule,
   ],
   controllers: [],
   providers: [
