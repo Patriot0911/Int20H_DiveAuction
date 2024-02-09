@@ -3,6 +3,7 @@ import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DbModule } from './modules/db/db.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
 import { SessionStore } from './common/session-store';
 import { serverConfig, sessionConfig, OAuthConfig } from './config';
 
@@ -16,6 +17,7 @@ import { serverConfig, sessionConfig, OAuthConfig } from './config';
       load: [serverConfig, sessionConfig, OAuthConfig],
     }),
     AuthModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [
