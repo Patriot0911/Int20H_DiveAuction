@@ -6,9 +6,14 @@ import { DbModule } from './modules/db/db.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { serverConfig, OAuthConfig } from './config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(process.cwd(), 'public/uploaded'),
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
