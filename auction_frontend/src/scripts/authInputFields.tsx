@@ -13,7 +13,8 @@ const authInputFields: IAuthUpInputFieldSettings[] = [
         name:           'userName',
         placeholder:    'Ім\'я Користувача',
         required:       true,
-        minLength:      5,
+        minLength:      3,
+        maxLength:      50,
         iconComponent:
         <FaUserCircle
             {...iconProps}
@@ -26,6 +27,7 @@ const authInputFields: IAuthUpInputFieldSettings[] = [
         required:       true,
         isloginform:    1,
         minLength:      3,
+        maxLength:      255,
         iconComponent:
         <IoMailUnread
             {...iconProps}
@@ -38,6 +40,7 @@ const authInputFields: IAuthUpInputFieldSettings[] = [
         required:       true,
         isloginform:    1,
         minLength:      8,
+        maxLength:      32,
         iconComponent:
         <RiLockPasswordFill
             {...iconProps}

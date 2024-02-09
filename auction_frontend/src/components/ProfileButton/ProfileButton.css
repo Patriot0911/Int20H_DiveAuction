@@ -1,6 +1,5 @@
 
 .profile {
-    --profile-size: 50px;
     background: linear-gradient(
         #2b141c,
         #791d44
@@ -23,4 +22,51 @@
 }
 .profile-img-container {
     height: 85%;
+}
+.pop-login {
+    padding: 10px 10px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 100px;
+    top: 40px;
+    background: radial-gradient(
+        #791d44,
+        #2b141c
+    );
+    gap: 2px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.342) 1px 4px 4px 2px;
+    z-index: 3;
+    overflow: hidden;
+    cursor: default;
+}
+.pop-login a {
+    width: 100%;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    background: radial-gradient(
+        #7a4a5b91,
+        #492836bb
+    );
+    padding: 4px;
+    border-radius: 4px;
+}
+.pop-login .auth-button:hover {
+    box-shadow: rgba(255, 255, 255, 0.459) 0px 0px 5px;
+    transition: all 0.1s ease-in-out;
+}
+.profile:hover .pop-login {
+    display: flex;
+    animation: popup-apear 0.4s normal;
+}
+
+@keyframes popup-apear {
+    0% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
 }

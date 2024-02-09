@@ -56,3 +56,26 @@ export interface IFooterTextsProps extends IComponentChildrenProp {
         'small' | 'big' |
         'logo' | 'central';
 };
+
+export interface IProfileInfo {
+    isAuth: boolean;
+    data?: {
+        id: number;
+        name: string;
+        avatar: string;
+        email: string;
+    }
+};
+
+export interface INavBarListItem extends INavButtonProps {
+    logged?: boolean;
+};
+
+export interface ILotItemProps {
+    title: string;
+    description: string;
+    img: string;
+    createdAt: Date | string;
+    price: number;
+    isFav?: boolean;
+};

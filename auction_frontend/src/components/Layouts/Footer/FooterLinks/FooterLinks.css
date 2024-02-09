@@ -4,11 +4,10 @@
     justify-content: center;
     gap: 25px;
 }
-a {
+.links a {
     transition: .5s;
     color: white;
 }
-a:hover {
-    transition: .5s;
+.links a:hover {
     color: gray;
 }

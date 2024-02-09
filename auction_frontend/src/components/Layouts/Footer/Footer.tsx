@@ -8,10 +8,12 @@ import './Footer.css';
 const Footer = () => {
     return (
         <footer
-            className={`${lemonFont.className} ${lobsterFont.className}`}
+            className={lemonFont.className}
         >
             <FooterMainInfo />
-            <div className="bottom-container">
+            <div
+                className={`bottom-container  ${lobsterFont.className}`}
+            >
                 <FooterLinks />
                 <CopyrightText />
                 <WarningText />

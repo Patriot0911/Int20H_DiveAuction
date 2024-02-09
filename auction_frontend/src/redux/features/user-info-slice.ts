@@ -1,21 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { IProfileInfo } from "@/types";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-    value: 0
+interface IInitialState {
+    value: IProfileInfo;
+};
+
+const initialState: IInitialState = {
+    value: {
+        isAuth: false
+    }
 };
 
 export const userInfo = createSlice({
     name: 'userInfo',
     initialState,
     reducers: {
-        addOne: (state) => ({
-            value: state.value+1
-        })
+        authUser: (state, actions: PayloadAction<IProfileInfo>) => ({
+            value: {
+                isAuth: true,
+                data: actions.payload.data
+            }
+        }),
+        logOutUser: () => initialState
     }
 })
 
 export const {
-    addOne
+    authUser,
+    logOutUser
 } = userInfo.actions;
 
 export default userInfo.reducer;

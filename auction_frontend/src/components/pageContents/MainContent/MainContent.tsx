@@ -1,4 +1,5 @@
 import BannerSection from './BannerSection';
+import ItemsSection from './ItemsSection';
 import './MainContent.css';
 
 const MainContent = () => {
@@ -7,6 +8,7 @@ const MainContent = () => {
             className={'main-page-container'}
         >
             <BannerSection />
+            <ItemsSection />
         </div>
     );
 };
