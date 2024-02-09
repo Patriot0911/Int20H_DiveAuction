@@ -26,7 +26,6 @@ header {
     margin-right: 40px;
 }
 .nav-container {
-    border: 1px solid #000;
     margin: 0 25px;
     display: flex;
     flex-grow: 0;

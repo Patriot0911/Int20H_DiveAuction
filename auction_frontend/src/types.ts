@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 export type TRooutLayoutProps = Readonly<IComponentChildrenProp>;
 
 export interface IComponentChildrenProp {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 };
 
 export interface INavBarButtonProps {
@@ -50,3 +50,9 @@ export interface IAuthFormProps {
 };
 
 export type THasAccountInfoProps = IAuthFormProps;
+
+export interface IFooterTextsProps extends IComponentChildrenProp {
+    texttype:
+        'small' | 'big' |
+        'logo' | 'central';
+};

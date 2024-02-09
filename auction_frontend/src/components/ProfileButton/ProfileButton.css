@@ -11,7 +11,7 @@
     border-radius: 50%;
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: flex-end;
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.664) 1px 5px 5px 5px;
     transition: all 0.2s;

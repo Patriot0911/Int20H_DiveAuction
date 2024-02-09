@@ -1,0 +1,14 @@
+.links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+a {
+    transition: .5s;
+    color: white;
+}
+a:hover {
+    transition: .5s;
+    color: gray;
+}
