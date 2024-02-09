@@ -1,10 +1,4 @@
-import { FastifySessionOptions } from '@fastify/session';
-
-export interface SessionConfig extends FastifySessionOptions {
-  cacheTimeout: number;
-}
-
-interface ServerConfig {
+export interface ServerConfig {
   port: string;
   prefix: string;
   cors: {

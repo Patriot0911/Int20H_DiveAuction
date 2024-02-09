@@ -4,7 +4,13 @@ export default () => ({
     prefix: '/api',
     cors: {
       origin: '*',
-      allowedHeaders: ['Content-Type', 'Upgrade', 'Connection', 'Origin'],
+      allowedHeaders: [
+        'Content-Type',
+        'Upgrade',
+        'Connection',
+        'Origin',
+        'Authorization',
+      ],
       allowedMethods: '*',
     },
   },

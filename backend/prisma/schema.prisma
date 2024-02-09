@@ -28,15 +28,6 @@ model User {
   @@map("users")
 }
 
-model Session {
-  id      String   @id @db.Uuid
-  expires DateTime @db.Timestamp
-  data    String
-
-  @@index([expires])
-  @@map("sessions")
-}
-
 model Category {
   id       Int       @id @default(autoincrement())
   name     String    @db.VarChar(50)

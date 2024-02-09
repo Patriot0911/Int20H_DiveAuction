@@ -1,23 +1,33 @@
 import { APP_PIPE } from '@nestjs/core';
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 import { DbModule } from './modules/db/db.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuctionsModule } from './modules/auctions/auctions.module';
 import { BidsModule } from './modules/bids/bids.module';
-import { SessionStore } from './common/session-store';
-import { serverConfig, sessionConfig, OAuthConfig } from './config';
+import { serverConfig, OAuthConfig } from './config';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
-    DbModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(process.cwd(), 'public/uploaded'),
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
       ignoreEnvFile: process.env.NODE_ENV === 'production',
-      load: [serverConfig, sessionConfig, OAuthConfig],
+      load: [serverConfig, OAuthConfig],
     }),
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '1d' },
+    }),
+    DbModule,
     AuthModule,
     AuctionsModule,
     UsersModule,
@@ -31,7 +41,6 @@ import { serverConfig, sessionConfig, OAuthConfig } from './config';
         whitelist: true,
       }),
     },
-    SessionStore,
   ],
 })
 export class AppModule {}
