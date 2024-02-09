@@ -30,11 +30,10 @@ export class AuthController {
   ) {}
 
   @Post('/signup')
-  @HttpCode(201)
+  @HttpCode(200)
   async signup(@Body() body: SignupDto) {
     const { name, email, password } = body;
     await this.service.register(name, email, password);
-    return { status: 'signed up' };
   }
 
   @Post('/signin')
@@ -48,7 +47,7 @@ export class AuthController {
     const user = await this.service.authenticate(email, password);
     if (!user) throw new BadRequestException('Invalid email or password');
     this.service.startSession(session, user);
-    return { status: 'signed in', user };
+    return { token: session.encryptedSessionId, user };
   }
 
   @Post('/logout')
@@ -56,7 +55,6 @@ export class AuthController {
   @Authorized()
   async logout(@Session() session: FastifySessionObject) {
     await this.service.endSession(session);
-    return { status: 'logged out' };
   }
 
   @Get('/oauth/google')
