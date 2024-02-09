@@ -3,3 +3,8 @@ export interface Profile {
   email: { value: string; verified: boolean };
   photo: string;
 }
+
+export interface JwtPayload {
+  id: number;
+  email: string;
+}

@@ -7,7 +7,6 @@ import {
   Post,
   Req,
   Res,
-  Session,
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
@@ -18,7 +17,6 @@ import { Authorized } from 'src/common/guards/auth.guard';
 import { SignupDto } from '../dtos/signup.dto';
 import { SigninDto } from '../dtos/signin.dto';
 import { UserSerializationDto } from '../dtos/user.dto';
-import type { FastifySessionObject } from '@fastify/session';
 import type { Profile } from '../interfaces/profile.interface';
 import type { FastifyReply } from 'fastify';
 
@@ -39,23 +37,18 @@ export class AuthController {
   @Post('/signin')
   @HttpCode(200)
   @Serialize(UserSerializationDto, { nested: 'user' })
-  async signin(
-    @Session() session: FastifySessionObject,
-    @Body() body: SigninDto,
-  ) {
+  async signin(@Body() body: SigninDto) {
     const { email, password } = body;
     const user = await this.service.authenticate(email, password);
+    const token = await this.service.issueToken(user);
     if (!user) throw new BadRequestException('Invalid email or password');
-    this.service.startSession(session, user);
-    return { token: session.encryptedSessionId, user };
+    return { token, user };
   }
 
   @Post('/logout')
   @HttpCode(200)
   @Authorized()
-  async logout(@Session() session: FastifySessionObject) {
-    await this.service.endSession(session);
-  }
+  async logout() {}
 
   @Get('/oauth/google')
   @UseGuards(AuthGuard('google'))
@@ -63,12 +56,9 @@ export class AuthController {
 
   @Get('/callback/google')
   @UseGuards(AuthGuard('google'))
-  async googleOAuthCb(
-    @Req() req: { user: Profile; session: FastifySessionObject },
-    @Res() res: FastifyReply,
-  ) {
+  async googleOAuthCb(@Req() req: { user: Profile }, @Res() res: FastifyReply) {
     const user = await this.service.useGoogleOAuth(req.user);
-    if (user) this.service.startSession(req.session, user);
+    await this.service.issueToken(user);
     res.redirect(302, this.config.get<string>('OAuth.redirectURL'));
   }
 }
