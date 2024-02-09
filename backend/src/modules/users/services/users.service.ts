@@ -10,26 +10,21 @@ export class UsersService {
     this.repository = db.user;
   }
 
-  async findMany() {
-    const users = await this.repository.findMany();
+  async findMany(skip: number, take: number) {
+    const users = await this.repository.findMany({
+      skip,
+      take,
+    });
     return users;
   }
 
   async findUnique(id: number) {
-    try {
-      const user = await this.repository.findUnique({
-        where: {
-          id: id,
-        },
-      });
+    const user = await this.repository.findUnique({
+      where: { id },
+    });
 
-      if (!user) {
-        throw new NotFoundException('User not found');
-      }
+    if (!user) throw new NotFoundException('User not found');
 
-      return user;
-    } catch (e: any) {
-      return e;
-    }
+    return user;
   }
 }
