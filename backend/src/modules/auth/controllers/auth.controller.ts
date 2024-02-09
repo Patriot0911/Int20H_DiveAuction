@@ -13,7 +13,6 @@ import { AuthService } from '../services/auth.service';
 import { ConfigService } from '@nestjs/config';
 import { Serialize } from 'src/common/interceptors/serialize.interceptor';
 import { AuthGuard } from '@nestjs/passport';
-import { Authorized } from 'src/common/guards/auth.guard';
 import { SignupDto } from '../dtos/signup.dto';
 import { SigninDto } from '../dtos/signin.dto';
 import { UserSerializationDto } from '../dtos/user.dto';
@@ -44,11 +43,6 @@ export class AuthController {
     if (!user) throw new BadRequestException('Invalid email or password');
     return { token, user };
   }
-
-  @Post('/logout')
-  @HttpCode(200)
-  @Authorized()
-  async logout() {}
 
   @Get('/oauth/google')
   @UseGuards(AuthGuard('google'))

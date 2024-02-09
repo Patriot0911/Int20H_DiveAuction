@@ -5,7 +5,7 @@ import {
   hashPassword,
   validatePassword,
   generatePassword,
-} from 'src/common/security';
+} from 'src/common/utils/security';
 import type { Prisma, User } from '@prisma/client';
 import type { JwtPayload, Profile } from '../interfaces/profile.interface';
 
