@@ -10,7 +10,7 @@ const ProfileButton = () => {
                 className={'profile-img-container'}
             >
                 <FaUser
-                    size={'45px'}
+                    size={'50px'}
                     color={'#ffff'}
                 />
             </div>
@@ -19,3 +19,4 @@ const ProfileButton = () => {
 };
 
 export default ProfileButton;
+

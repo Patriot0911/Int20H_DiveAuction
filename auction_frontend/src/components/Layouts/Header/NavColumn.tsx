@@ -1,5 +1,6 @@
 import ProfileButton from "@/components/ProfileButton/ProfileButton";
 import NavBar from "../NavBar/NavBar";
+import ProfileElement from "@/components/ProfileElement/ProfileElement";
 
 const NavColumn = () => {
     return (
@@ -11,7 +12,7 @@ const NavColumn = () => {
             >
                 <NavBar />
             </div>
-            <ProfileButton />
+            <ProfileElement />
         </div>
     );
 };
