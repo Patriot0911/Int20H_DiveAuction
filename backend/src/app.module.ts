@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DbModule } from './modules/db/db.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { SessionStore } from './common/session-store';
-import { sessionConfig, OAuthConfig } from './config';
+import { serverConfig, sessionConfig, OAuthConfig } from './config';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { sessionConfig, OAuthConfig } from './config';
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
       ignoreEnvFile: process.env.NODE_ENV === 'production',
-      load: [sessionConfig, OAuthConfig],
+      load: [serverConfig, sessionConfig, OAuthConfig],
     }),
     AuthModule,
   ],

@@ -3,7 +3,7 @@ import sessionPlugin from '@fastify/session';
 import multipartPlugin from '@fastify/multipart';
 import { ConfigService } from '@nestjs/config';
 import { SessionStore } from './common/session-store';
-import type { SessionConfig } from 'types/config';
+import type { SessionConfig, ServerConfig } from 'types/config';
 import type { NestFastifyApplication } from '@nestjs/platform-fastify';
 
 export const setup = async (app: NestFastifyApplication) => {
@@ -17,7 +17,7 @@ export const setup = async (app: NestFastifyApplication) => {
   await app.register(multipartPlugin);
   const fastify = app.getHttpAdapter().getInstance();
 
-  // Add compatibility with Node-like response methods
+  // Add compatibility with native Node response methods
   fastify.decorateReply('setHeader', function (name: string, value: string) {
     this.header(name, value);
   });
@@ -25,5 +25,7 @@ export const setup = async (app: NestFastifyApplication) => {
     this.send(payload);
   });
 
-  app.setGlobalPrefix('/api');
+  const { cors, prefix } = config.get<ServerConfig>('server');
+  app.enableCors(cors);
+  app.setGlobalPrefix(prefix);
 };
