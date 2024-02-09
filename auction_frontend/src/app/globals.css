@@ -2,26 +2,25 @@
     color: aliceblue;
     font-size: 18px;
 }
-
 body {
     padding: 0;
     margin: 0;
 }
-
 main {
-    min-height: 100dvh;
-    max-width: 100dvw;
     background: linear-gradient(
         to right bottom,
         #47284a,
         #402343,
         #301D1D
     );
+    min-height: 100dvh;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
-@keyframes logreg-container-apear {
+@keyframes classic-container-apear {
     0% {
         transform: translateY(50px);
         opacity: 0;

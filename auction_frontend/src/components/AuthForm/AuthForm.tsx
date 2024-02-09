@@ -13,7 +13,6 @@ const AuthForm = ({ register }: IAuthFormProps) => {
     const [email, setEmail] = useState('');
     const submitHandle = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(1);
     };
     const googleAuthHandle = () => {
 

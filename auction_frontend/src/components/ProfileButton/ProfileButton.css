@@ -2,26 +2,25 @@
 .profile {
     --profile-size: 50px;
     background: linear-gradient(
-        #3B0C1D,
-        #571717
+        #2b141c,
+        #791d44
     );
-    width: var(--profile-size);
-    height: var(--profile-size);
+    width: 50px;
+    height: 50px;
     flex: 0 0 auto;
-    border-radius: calc(var(--profile-size)/2);
+    border-radius: 50%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
     overflow: hidden;
-    box-shadow:0 0 0 2px rgba(245, 245, 245, 0.413) inset;
-
-    padding: 1px;
+    box-shadow: rgba(0, 0, 0, 0.664) 1px 5px 5px 5px;
+    transition: all 0.2s;
+    padding: 2px;
 }
-.profile :hover {
-    border-width: 3px;
-    transition: .5s;
+.profile:hover {
     cursor: pointer;
+    box-shadow: rgba(172, 161, 161, 0.664) 1px 2px 5px 5px;
 }
 .profile-img-container {
-    height: 90%;
+    height: 85%;
 }
