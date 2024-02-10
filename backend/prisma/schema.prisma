@@ -14,16 +14,17 @@ enum AuctionStatus {
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
-  email     String     @unique @db.VarChar(256)
-  verified  Boolean    @default(false)
-  name      String     @db.VarChar(50)
-  password  String     @db.VarChar(200)
-  photo     String     @default("/default-user.jpeg") @db.VarChar(200)
-  auctions  Auction[]
-  favorites Favorite[]
-  bids      Bid[]
-  messages  Message[]
+  id            Int             @id @default(autoincrement())
+  email         String          @unique @db.VarChar(256)
+  verified      Boolean         @default(false)
+  name          String          @db.VarChar(50)
+  password      String          @db.VarChar(200)
+  photo         String          @default("/default-user.jpeg") @db.VarChar(200)
+  auctions      Auction[]
+  favorites     Favorite[]
+  bids          Bid[]
+  messages      Message[]
+  AuctionWinner AuctionWinner[]
 
   @@map("users")
 }
@@ -38,21 +39,22 @@ model Category {
 }
 
 model Auction {
-  id            Int            @id @default(autoincrement())
-  userId        Int            @map("user_id")
-  categoryId    Int            @map("category_id")
-  startPrice    Float          @map("start_price")
-  status        AuctionStatus  @default(planned)
-  startDate     DateTime       @map("start_date") @db.Timestamp
-  endDate       DateTime       @map("end_date") @db.Timestamp
-  title         String         @db.VarChar(100)
+  id            Int             @id @default(autoincrement())
+  userId        Int             @map("user_id")
+  categoryId    Int             @map("category_id")
+  startPrice    Float           @map("start_price")
+  status        AuctionStatus   @default(planned)
+  startDate     DateTime        @map("start_date") @db.Timestamp
+  endDate       DateTime        @map("end_date") @db.Timestamp
+  title         String          @db.VarChar(100)
   description   String
-  user          User           @relation(fields: [userId], references: [id], onDelete: NoAction)
-  category      Category       @relation(fields: [categoryId], references: [id], onDelete: NoAction)
+  user          User            @relation(fields: [userId], references: [id], onDelete: NoAction)
+  category      Category        @relation(fields: [categoryId], references: [id], onDelete: NoAction)
   auctionImages AuctionImage[]
   favorites     Favorite[]
   bids          Bid[]
   messages      Message[]
+  AuctionWinner AuctionWinner[]
 
   @@index([userId])
   @@index([categoryId])
@@ -103,4 +105,14 @@ model Message {
 
   @@index([auctionId])
   @@map("messages")
+}
+
+model AuctionWinner {
+  userId    Int
+  auctionId Int
+  user User @relation(fields: [userId], references: [id])
+  auction Auction @relation(fields: [auctionId], references: [id])
+  
+  @@id([userId, auctionId])
+  @@map("auction_winners")
 }
