@@ -9,6 +9,7 @@ import {
 import { UsersService } from '../services/users.service';
 import { Serialize } from 'src/common/interceptors/serialize.interceptor';
 import { UserSerializationDto } from 'src/modules/auth/dtos/user.dto';
+import { GetUsersDto } from '../dto/get-users.dto';
 
 @Controller('/users')
 export class UsersController {
@@ -17,10 +18,7 @@ export class UsersController {
   @Serialize(UserSerializationDto)
   @Get()
   @HttpCode(200)
-  async getAllUsers(
-    @Query('take', ParseIntPipe) take: number,
-    @Query('skip', ParseIntPipe) skip: number,
-  ) {
+  async getAllUsers(@Query() { skip, take }: GetUsersDto) {
     const users = await this.usersService.findMany(skip, take);
     return users;
   }
