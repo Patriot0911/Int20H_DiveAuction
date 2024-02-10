@@ -9,7 +9,7 @@ import {
   UseInterceptors,
   BadRequestException,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import type { MultipartFile } from '@fastify/multipart';
 import type { FastifyRequest } from 'fastify';
 
@@ -27,6 +27,17 @@ const UPLOAD_DIR = join(process.cwd(), '/public/uploaded');
 const UPLOAD_TIMEOUT = 5000;
 const UNIQUE_HASH_LENGTH = 5;
 const UPLOADED_FIELD = 'uploaded';
+
+export const updateUploads = (oldFiles: string[], newFiles: string[]): void => {
+  const promises = newFiles.map((file, i) =>
+    fs.promises.rename(join(UPLOAD_DIR, file), join(UPLOAD_DIR, oldFiles[i])),
+  );
+  Promise.all(promises).catch(NOOP);
+};
+
+const deleteUploads = (files: string[]): void => {
+  Promise.all(files.map((file) => fs.promises.unlink(file))).catch(NOOP);
+};
 
 export class UploadInterceptor implements NestInterceptor {
   private readonly dirPath: string;
@@ -99,7 +110,9 @@ export class UploadInterceptor implements NestInterceptor {
         );
       }
     }
-    req.body[this.uploadedField] = files;
+    req.body[this.uploadedField] = files.map((file) =>
+      file.replace(UPLOAD_DIR, ''),
+    );
   }
 
   async intercept(
@@ -108,14 +121,19 @@ export class UploadInterceptor implements NestInterceptor {
   ): Promise<Observable<any>> {
     const req = ctx.switchToHttp().getRequest();
     const hash = randomBytes(UNIQUE_HASH_LENGTH).toString('hex');
-    const files = [];
+    const files: string[] = [];
     try {
       await this.process(req, hash, files);
     } catch (err) {
-      Promise.all(files.map((file) => fs.promises.unlink(file))).catch(NOOP);
+      deleteUploads(files);
       throw err;
     }
-    return handler.handle();
+    return handler.handle().pipe(
+      catchError((err) => {
+        deleteUploads(files);
+        return throwError(() => err);
+      }),
+    );
   }
 }
 
