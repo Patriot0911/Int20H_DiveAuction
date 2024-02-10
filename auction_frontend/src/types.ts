@@ -85,10 +85,11 @@ export interface INavBarListItem extends INavButtonProps {
 };
 
 export interface ILotItemProps {
+    id: number;
     title: string;
     description: string;
-    img: string;
-    createdAt: Date | string;
+    image: string;
+    createdAt: string;
     price: number;
     isFav?: boolean;
 };
@@ -117,4 +118,16 @@ export interface IAuthErrorField {
 export interface IAuthPopUpContainerProps {
     errorMsg: string;
     closeHandle: () => void;
+};
+
+export interface ILotItemDateProps {
+    createdAt: string;
+};
+
+export interface ILotDescriptionProps {
+    description: string;
+};
+
+export interface ILotTitleProps {
+    title: string;
 };

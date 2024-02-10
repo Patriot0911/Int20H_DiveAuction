@@ -1,4 +1,4 @@
-import { Lemon, Lobster } from 'next/font/google';
+import { Lemon, Lobster, Timmana } from 'next/font/google';
 import { Trade_Winds } from 'next/font/google';
 
 export const tradeWindsFont = Trade_Winds({
@@ -14,4 +14,9 @@ export const lemonFont = Lemon({
 export const lobsterFont = Lobster({
     subsets: ['latin'],
     weight: '400'
+});
+
+export const timmanaFont = Timmana({
+    subsets: ['latin'],
+    weight: ['400']
 });

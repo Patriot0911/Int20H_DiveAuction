@@ -23,7 +23,13 @@ const ItemsSection = () => {
                     />
                 )
             } */}
-            <LotItem />
+            {
+                [...new Array(8)].map((item, index) =>
+                    <LotItem
+                        key={index}
+                    />
+                )
+            }
         </section>
     );
 };
