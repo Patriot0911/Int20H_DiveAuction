@@ -13,7 +13,7 @@ export class MyAuctionService {
   async findMyAuctions(id: number) {
     const myAuctions = await this.repository.findMany({
       where: {
-        userId: id,
+        ownerId: id,
       },
     });
 
