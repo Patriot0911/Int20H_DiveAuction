@@ -6,26 +6,53 @@ import {
   Req,
   Body,
   Patch,
+  Get,
+  Query,
+  NotFoundException,
 } from '@nestjs/common';
 import { AuctionService } from '../services/auctions.service';
 import { BidsService } from '../services/bids.service';
 import { Authorized } from 'src/common/guards/auth.guard';
-import { VerifiedOnly } from '../guards/verified-only';
 import { Upload } from 'src/common/interceptors/upload.interceptor';
 import { CreateAuctionDto } from '../dtos/create-auction.dto';
 import { UpdateAuctionDto } from '../dtos/update-auction.dto';
-import { CreateBidDto } from '../dtos/create-bid';
+import { CreateBidDto } from '../dtos/create-bid.dto';
+import { GetAuctionsDto } from '../dtos/get-auctions.dto';
 import type { User } from '@prisma/client';
+import { Serialize } from 'src/common/interceptors/serialize.interceptor';
+import { UserSerializationDto } from 'src/modules/auth/dtos/user.dto';
 
-@Controller('/auctions')
+@Controller()
 export class AuctionsController {
   constructor(
     private readonly auctionsService: AuctionService,
     private readonly bidsService: BidsService,
   ) {}
 
-  @Post()
-  @VerifiedOnly()
+  @Get('/categories')
+  async getAllCategories() {
+    return await this.auctionsService.getAllCategories();
+  }
+
+  @Get('/auctions')
+  async getAll(@Query() query: GetAuctionsDto) {
+    return await this.auctionsService.getAll(query);
+  }
+
+  @Serialize(UserSerializationDto, { nested: 'activeUsers' })
+  @Get('/auctions/:id')
+  async getOne(@Param('id', ParseIntPipe) id: number) {
+    const auction = await this.auctionsService.getOne(id);
+    if (!auction) throw new NotFoundException('Auction not found');
+    const images = await this.auctionsService.getAuctionImageUrls(id);
+    const active = await this.bidsService.getActiveByAuction(id);
+    // eslint-disable-next-line
+    const bids = active.map(({ user, ...rest }) => ({ ...rest }));
+    const activeUsers = active.map(({ user }) => user);
+    return { auction, images, bids, activeUsers };
+  }
+
+  @Post('/auctions')
   @Authorized()
   @Upload({
     dir: 'auctions',
@@ -37,7 +64,7 @@ export class AuctionsController {
     return await this.auctionsService.create(user, data);
   }
 
-  @Patch('/:id')
+  @Patch('/auctions/:id')
   @Authorized()
   @Upload({
     dir: 'auctions',
@@ -53,7 +80,7 @@ export class AuctionsController {
     return await this.auctionsService.update(user, id, data);
   }
 
-  @Post('/:id/bid')
+  @Post('/auctions/:id/bid')
   @Authorized()
   async bid(
     @Req() req,

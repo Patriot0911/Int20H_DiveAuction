@@ -22,17 +22,13 @@ export class BidsService {
 
   constructor(
     private readonly gateway: AppGateway,
-    db: DbService,
+    private readonly db: DbService,
   ) {
     this.queue = new Queue({
       handler: async ({ user, auctionId, price }: JobTask) => {
         const [auction, active] = await Promise.all([
           db.auction.findUnique({ where: { id: auctionId } }),
-          db.bid.findMany({
-            where: { auctionId },
-            orderBy: { id: 'desc' },
-            include: { user: true },
-          }),
+          this.getActiveByAuction(auctionId),
         ]);
         if (!auction) throw new BadRequestException('Auction not found');
         if (auction.status !== AuctionStatus.active)
@@ -63,5 +59,13 @@ export class BidsService {
     const res: JobRes = await this.queue.exec({ user, auctionId, price });
     this.gateway.emit(Events.NEW_BID, res);
     return res;
+  }
+
+  async getActiveByAuction(auctionId: number) {
+    return await this.db.bid.findMany({
+      where: { auctionId },
+      orderBy: { id: 'desc' },
+      include: { user: true },
+    });
   }
 }

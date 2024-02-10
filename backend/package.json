@@ -15,7 +15,9 @@
     "test:watch": "dotenv -v NODE_ENV=test jest -- --watch",
     "test:e2e": "dotenv -v NODE_ENV=test jest -- --config ./tests/jest.config.json",
     "migrate:dev": "dotenv -c development prisma migrate dev",
-    "migrate:test": "dotenv -c test prisma migrate dev"
+    "migrate:test": "dotenv -c test prisma migrate dev",
+    "seed:dev": "dotenv -c development ts-node prisma/seed.ts",
+    "seed:test": "dotenv -c test ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@fastify/multipart": "^8.1.0",
