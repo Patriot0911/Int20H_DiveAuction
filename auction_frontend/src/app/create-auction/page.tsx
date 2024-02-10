@@ -14,7 +14,6 @@ const MyAuctionsPage = () => {
                 {...signupList}
             />
             <CreateAuction/>
-
         </>
     );
 };

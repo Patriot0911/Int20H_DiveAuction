@@ -1,22 +1,65 @@
+
 .profile {
     background: linear-gradient(
-        #3B0C1D,
-        #571717
+        #2b141c,
+        #791d44
     );
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     flex: 0 0 auto;
-    border-radius: 22.5px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     overflow: hidden;
-    border: 1px solid rgba(245, 245, 245, 0.413);
-    padding: 1px;
+    box-shadow: rgba(0, 0, 0, 0.664) 1px 5px 5px 5px;
+    transition: all 0.2s;
+    padding: 2px;
 }
-.profile :hover {
+.profile:hover {
     cursor: pointer;
+    box-shadow: rgba(172, 161, 161, 0.664) 1px 2px 5px 5px;
 }
 .profile-img-container {
-    height: 90%;
+    height: 85%;
+}
+.pop-login {
+    padding: 10px 10px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 100px;
+    top: 40px;
+    background: radial-gradient(
+        #791d44,
+        #2b141c
+    );
+    gap: 2px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.342) 1px 4px 4px 2px;
+    z-index: 3;
+    overflow: hidden;
+    cursor: default;
+}
+.pop-login a {
+    width: 100%;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    background: radial-gradient(
+        #7a4a5b91,
+        #492836bb
+    );
+    padding: 4px;
+    border-radius: 4px;
+}
+.pop-login .auth-button:hover {
+    box-shadow: rgba(255, 255, 255, 0.459) 0px 0px 5px;
+    transition: all 0.1s ease-in-out;
+}
+.profile:hover .pop-login {
+    display: flex;
+    animation: popup-apear 0.4s normal;
 }

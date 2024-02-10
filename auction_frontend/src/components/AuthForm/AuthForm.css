@@ -28,3 +28,36 @@
     flex-direction: row;
     gap: 10px;
 }
+.auth-form .error-field {
+    text-align: center;
+    color: rgb(243, 138, 138);
+    height: 100px;
+    max-width: 300px;
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.auth-popup {
+    min-height: 200px;
+    width: 350px;
+    gap: 20px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    animation: classic-container-apear 0.3s ease-in-out;
+}
+.auth-popup button {
+    cursor: pointer;
+    color: aliceblue;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.488);
+    padding: 5px 10px;
+    background: radial-gradient(
+        #511b39f8,
+        rgba(133, 85, 192, 0.984)
+    );
+}
