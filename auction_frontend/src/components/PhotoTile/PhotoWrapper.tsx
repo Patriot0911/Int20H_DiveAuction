@@ -1,4 +1,4 @@
-import './PhotoWrapper.css';
+// import './PhotoWrapper.css';
 
 const PhotoWrapper = () => { //props: ILotItemProps
     const item = {

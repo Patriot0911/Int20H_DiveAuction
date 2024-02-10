@@ -13,7 +13,7 @@ const MyAuctionsPage = () => {
             <BackgroundDecals
                 {...signupList}
             />
-            {/* <CreateAuction/> */}
+            <CreateAuction/>
         </>
     );
 };

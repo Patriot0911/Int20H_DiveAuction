@@ -1,9 +1,6 @@
-
-*{
-    z-index: 2;
-}
-.container{
+.auction-container{
     --elements-indent: 20px;
+    z-index: 2;
     --standart-img-radius: 10px;
     --standart-background: rgba(59, 33, 76, 1);
     --standart-border-color: rgba(255, 255, 255, 0.17);
@@ -15,7 +12,7 @@
     height: 700px;
     background: var(--standart-background);
     box-shadow: 400px -500px 500px -500px rgba(51, 30, 36, 0.7) inset;
-    /*overflow: hidden;*/
+    overflow: hidden;
 }
 legend{
     background: rgba(59, 33, 50, 1);
@@ -56,8 +53,10 @@ legend{
     width:100%;
     height:var(--height);
     background:
-            linear-gradient(180deg, rgba(59, 33, 76, 1) 30px,
-                                    rgba(59, 33, 76, 0) 100%);
+    linear-gradient(
+        180deg, rgba(59, 33, 76, 1) 30px,
+        rgba(59, 33, 76, 0) 100%
+    );
 
 }
 
@@ -97,17 +96,20 @@ legend{
     width: 100%;
     font-size: 40px;
 }
-.bet-input{
-    font-size: 20px;
-    margin: 0 90px;
-}
-textarea{
+.description-input {
     resize: none;
     flex: 1 1 auto;
 
     height: 200px;
     width: 100%;
     font-size: 20px;
+}
+.description-input::-webkit-scrollbar {
+    display: none;
+}
+.bet-input{
+    font-size: 20px;
+    margin: 0 90px;
 }
 .buttons{
     width: 100%;
@@ -134,6 +136,6 @@ textarea{
     flex: 1 1 100%;
     transition: .3s;
 }
-.lot-item-wrapper:last-of-type{
+.auction-container .lot-item-wrapper:last-of-type{
     margin: 0;
 }
