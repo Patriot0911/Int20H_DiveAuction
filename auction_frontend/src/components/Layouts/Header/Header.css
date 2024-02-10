@@ -1,6 +1,9 @@
 header {
     padding: 10px;
+
     position: fixed;
+    box-sizing: border-box;
+
     width: 100%;
     background: #2716269e;
     box-shadow: 2px 6px 15px rgba(90, 52, 101, 0.636);
