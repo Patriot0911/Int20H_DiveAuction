@@ -19,7 +19,7 @@ model User {
   verified      Boolean         @default(false)
   name          String          @db.VarChar(50)
   password      String          @db.VarChar(200)
-  photo         String          @default("/default-user.jpeg") @db.VarChar(200)
+  photo         String          @default("/users/default.jpg") @db.VarChar(200)
   auctions      Auction[]
   favorites     Favorite[]
   bids          Bid[]
@@ -39,24 +39,24 @@ model Category {
 }
 
 model Auction {
-  id            Int             @id @default(autoincrement())
-  userId        Int             @map("user_id")
-  categoryId    Int             @map("category_id")
-  startPrice    Float           @map("start_price")
-  status        AuctionStatus   @default(planned)
-  startDate     DateTime        @map("start_date") @db.Timestamp
-  endDate       DateTime        @map("end_date") @db.Timestamp
-  title         String          @db.VarChar(100)
+  id            Int            @id @default(autoincrement())
+  ownerId       Int            @map("owner_id")
+  categoryId    Int            @map("category_id")
+  startPrice    Float          @map("start_price")
+  status        AuctionStatus  @default(planned)
+  startDate     DateTime       @map("start_date") @db.Timestamp
+  endDate       DateTime       @map("end_date") @db.Timestamp
+  title         String         @db.VarChar(100)
   description   String
-  user          User            @relation(fields: [userId], references: [id], onDelete: NoAction)
-  category      Category        @relation(fields: [categoryId], references: [id], onDelete: NoAction)
+  owner          User           @relation(fields: [ownerId], references: [id], onDelete: NoAction)
+  category      Category       @relation(fields: [categoryId], references: [id], onDelete: NoAction)
   auctionImages AuctionImage[]
   favorites     Favorite[]
   bids          Bid[]
   messages      Message[]
   AuctionWinner AuctionWinner[]
 
-  @@index([userId])
+  @@index([ownerId])
   @@index([categoryId])
   @@map("auctions")
 }

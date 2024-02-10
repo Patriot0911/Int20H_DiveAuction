@@ -1,52 +1,66 @@
 import {
   Controller,
   Param,
-  Get,
-  Query,
   ParseIntPipe,
-  NotFoundException,
+  Post,
+  Req,
+  Body,
+  Patch,
 } from '@nestjs/common';
 import { AuctionService } from '../services/auctions.service';
-import { BidsService } from 'src/modules/bids/services/bids.service';
-import { UsersService } from 'src/modules/users/services/users.service';
+import { BidsService } from '../services/bids.service';
+import { Authorized } from 'src/common/guards/auth.guard';
+import { VerifiedOnly } from '../guards/verified-only';
+import { Upload } from 'src/common/interceptors/upload.interceptor';
+import { CreateAuctionDto } from '../dtos/create-auction.dto';
+import { UpdateAuctionDto } from '../dtos/update-auction.dto';
+import { CreateBidDto } from '../dtos/create-bid';
+import type { User } from '@prisma/client';
 
 @Controller('/auctions')
 export class AuctionsController {
   constructor(
     private readonly auctionsService: AuctionService,
     private readonly bidsService: BidsService,
-    private readonly usersService: UsersService,
   ) {}
 
-  @Get()
-  async getAllAuctions(
-    @Query('skip', ParseIntPipe) skip: number,
-    @Query('take', ParseIntPipe) take: number,
-  ) {
-    const auctions = await this.auctionsService.findMany(skip, take);
-
-    return auctions;
+  @Post()
+  @VerifiedOnly()
+  @Authorized()
+  @Upload({
+    dir: 'auctions',
+    mimeTypes: ['image/jpeg'],
+    maxUploadedFiles: 5,
+  })
+  async create(@Req() req, @Body() data: CreateAuctionDto) {
+    const user: User = req.user;
+    return await this.auctionsService.create(user, data);
   }
 
-  @Get(':id')
-  async getAuctionById(@Param('id', ParseIntPipe) id: number) {
-    const auction = await this.auctionsService.findUnique(id);
-    if (!auction) throw new NotFoundException('Auction not found');
+  @Patch('/:id')
+  @Authorized()
+  @Upload({
+    dir: 'auctions',
+    mimeTypes: ['image/jpeg', 'image/jpg'],
+    maxUploadedFiles: 5,
+  })
+  async update(
+    @Req() req,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() data: UpdateAuctionDto,
+  ) {
+    const user: User = req.user;
+    return await this.auctionsService.update(user, id, data);
+  }
 
-    const bids = await this.bidsService.findByAuctionId(id);
-    const userIds = new Set<number>();
-
-    for (const bid of bids) {
-      userIds.add(bid.userId);
-    }
-
-    const activeUsers = [];
-
-    for (const id of userIds) {
-      const user = await this.usersService.findUnique(id);
-      activeUsers.push(user);
-    }
-
-    return { auction, bids, userIds };
+  @Post('/:id/bid')
+  @Authorized()
+  async bid(
+    @Req() req,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() { price }: CreateBidDto,
+  ) {
+    const user: User = req.user;
+    return await this.bidsService.createBid(user, id, price);
   }
 }

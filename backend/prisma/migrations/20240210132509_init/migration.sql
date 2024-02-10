@@ -8,18 +8,9 @@ CREATE TABLE "users" (
     "verified" BOOLEAN NOT NULL DEFAULT false,
     "name" VARCHAR(50) NOT NULL,
     "password" VARCHAR(200) NOT NULL,
-    "photo" VARCHAR(200) NOT NULL DEFAULT '/default-user.jpeg',
+    "photo" VARCHAR(200) NOT NULL DEFAULT '/users/default.jpg',
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "sessions" (
-    "id" UUID NOT NULL,
-    "expires" TIMESTAMP NOT NULL,
-    "data" TEXT NOT NULL,
-
-    CONSTRAINT "sessions_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -33,7 +24,7 @@ CREATE TABLE "categories" (
 -- CreateTable
 CREATE TABLE "auctions" (
     "id" SERIAL NOT NULL,
-    "user_id" INTEGER NOT NULL,
+    "owner_id" INTEGER NOT NULL,
     "category_id" INTEGER NOT NULL,
     "start_price" DOUBLE PRECISION NOT NULL,
     "status" "AuctionStatus" NOT NULL DEFAULT 'planned',
@@ -88,13 +79,10 @@ CREATE TABLE "messages" (
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
-CREATE INDEX "sessions_expires_idx" ON "sessions"("expires");
-
--- CreateIndex
 CREATE INDEX "categories_name_idx" ON "categories"("name");
 
 -- CreateIndex
-CREATE INDEX "auctions_user_id_idx" ON "auctions"("user_id");
+CREATE INDEX "auctions_owner_id_idx" ON "auctions"("owner_id");
 
 -- CreateIndex
 CREATE INDEX "auctions_category_id_idx" ON "auctions"("category_id");
@@ -109,7 +97,7 @@ CREATE INDEX "bids_auction_id_user_id_idx" ON "bids"("auction_id", "user_id");
 CREATE INDEX "messages_auction_id_idx" ON "messages"("auction_id");
 
 -- AddForeignKey
-ALTER TABLE "auctions" ADD CONSTRAINT "auctions_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE "auctions" ADD CONSTRAINT "auctions_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "users"("id") ON DELETE NO ACTION ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "auctions" ADD CONSTRAINT "auctions_category_id_fkey" FOREIGN KEY ("category_id") REFERENCES "categories"("id") ON DELETE NO ACTION ON UPDATE CASCADE;
