@@ -33,7 +33,7 @@ export class BidsService {
         if (!auction) throw new BadRequestException('Auction not found');
         if (auction.status !== AuctionStatus.active)
           throw new BadRequestException('Cannot bid on that auction');
-        const [lastBid, ...bids] = active;
+        const [lastBid] = active;
         if (lastBid?.price >= price)
           throw new BadRequestException(
             'Price of the bid should be greater than the last one',
@@ -45,9 +45,16 @@ export class BidsService {
             userId: user.id,
           },
         });
-        const activeUsers = [
-          ...new Set(bids.map(({ user }) => user.id)).add(user.id),
+        const ids = [
+          ...new Set(active.map(({ userId }) => userId)).add(user.id),
         ];
+        const activeUsers = ids.map((id) => {
+          // eslint-disable-next-line
+          const { user: { password, ...rest } } = active.find(
+            ({ user }) => user.id === id,
+          );
+          return rest;
+        });
         return { auctionId, bid, activeUsers };
       },
       concurrency: 1,

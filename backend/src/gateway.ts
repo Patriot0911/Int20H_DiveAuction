@@ -8,10 +8,9 @@ export enum Events {
 }
 
 const PORT = parseInt(process.env.PORT!, 10);
-const WS_GATEWAY_PATH = process.env.WS_GATEWAY_PATH ?? '/';
 
 @Global()
-@WebSocketGateway(PORT, { path: WS_GATEWAY_PATH })
+@WebSocketGateway(PORT)
 export class AppGateway {
   @WebSocketServer() private readonly server: Server;
 
