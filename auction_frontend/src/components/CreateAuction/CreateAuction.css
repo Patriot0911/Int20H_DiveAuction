@@ -1,15 +1,18 @@
-.auction-container{
+.container{
+    position: relative;
+    z-index: 1;
     --elements-indent: 20px;
     z-index: 2;
     --standart-img-radius: 10px;
     --standart-background: rgba(59, 33, 76, 1);
     --standart-border-color: rgba(255, 255, 255, 0.17);
+    --create-menu-height: 900px;
     margin: 5%  auto;
     width: 70%;
     border: 4px solid var(--standart-border-color);
     border-radius: 40px  40px 10px 10px;
     padding: 50px;
-    height: 700px;
+    height: var(--create-menu-height);
     background: var(--standart-background);
     box-shadow: 400px -500px 500px -500px rgba(51, 30, 36, 0.7) inset;
     overflow: hidden;
@@ -25,19 +28,18 @@ legend{
 
 }
 .wrapper{
-    height: 100%;
+    height: calc(var(--create-menu-height) - 70px);
     display: flex;
     justify-content: space-between;
+    gap: var(--elements-indent);
+    overflow: hidden;
 }
 .photos-carousel{
-
     border-radius: 0 0 var(--standart-img-radius)  var(--standart-img-radius);
-
     margin-top: -40px;
     position: relative;
     width: 400px;
     flex: 0 0 auto;
-    /*max-height: 100px;*/
     overflow: scroll;
     scrollbar-width: none;
     text-align: center;
@@ -62,8 +64,6 @@ legend{
 
 .reg-form{
     flex: 1 1 auto;
-    padding: 0 var(--elements-indent);
-
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -136,6 +136,6 @@ legend{
     flex: 1 1 100%;
     transition: .3s;
 }
-.auction-container .lot-item-wrapper:last-of-type{
+.auction-container .photo-item-wrapper:last-of-type{
     margin: 0;
 }
