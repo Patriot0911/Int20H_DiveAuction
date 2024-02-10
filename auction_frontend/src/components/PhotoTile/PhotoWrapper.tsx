@@ -12,13 +12,13 @@ const PhotoWrapper = () => { //props: ILotItemProps
     }
     return (
         <div
-            className={'lot-item-wrapper'}
+            className={'photo-item-wrapper'}
         >
             <div
-                className={'lot-item-container'}
+                className={'photo-item-container'}
             >
                 <section
-                    className={'lot-img-container'}
+                    className={'photo-img-container'}
                 >
                     <img
                         alt={`lot-${item.id}-img`}

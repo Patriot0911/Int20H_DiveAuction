@@ -131,6 +131,6 @@ textarea{
     flex: 1 1 100%;
     transition: .3s;
 }
-.lot-item-wrapper:last-of-type{
+.photo-item-wrapper:last-of-type{
     margin: 0;
 }

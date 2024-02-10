@@ -1,11 +1,13 @@
-.lot-item-wrapper {
+
+.photo-item-wrapper {
+
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     margin-bottom: var(--elements-indent);
 }
-.lot-item-container {
+.photo-item-container {
     --standart-img-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -15,7 +17,7 @@
     border-radius: calc(var(--standart-img-radius) * 2);
 }
 
-.lot-item-container::before {
+.photo-item-container::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -35,14 +37,16 @@
     -webkit-mask-composite: xor;
     mask-composite: exclude;
 }
-.lot-img-container {
+.photo-img-container {
     padding: 10px;
     position: relative;
 }
-.lot-img-container img {
+.photo-img-container img {
+    padding: 0;
+    margin: 0;
     height: 100%;
     border-radius:calc(var(--standart-img-radius) * 1.3);
 }
-.lot-img-container .lot-price-container::-webkit-scrollbar {
+.photo-img-container .lot-price-container::-webkit-scrollbar {
     width: 0;
 }
