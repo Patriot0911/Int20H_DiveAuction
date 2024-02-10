@@ -38,11 +38,13 @@ GOOGLE_CALLBACK_URL="<PROTOCOL>://<HOST>:<PORT>/api/auth/callback/google"
 npm i
 ```
 
-### Run migrations:
+### Run migrations and seeds:
 ```shell
 npm run migrate:dev
+npm run seed:dev
 
 npm run migrate:test
+npm run seed:test
 ```
 
 ### Startup:
