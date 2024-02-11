@@ -29,4 +29,14 @@ export class MessagesService {
       },
     });
   }
+
+  async getMessages(auctionId: number) {
+    return await this.repository.findMany({
+      where: { auctionId },
+      include: {
+        user: { select: { id: true, name: true, email: true, photo: true } },
+      },
+      orderBy: { id: 'asc' },
+    });
+  }
 }

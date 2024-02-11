@@ -8,5 +8,6 @@ import { AppGateway } from 'src/gateway';
 @Module({
   providers: [AppGateway, AuctionService, BidsService, UsersService],
   controllers: [AuctionsController],
+  exports: [BidsService],
 })
 export class AuctionsModule {}
