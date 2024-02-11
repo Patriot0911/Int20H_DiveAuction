@@ -1,0 +1,95 @@
+.lot, .lot-container {
+    font-size: 20px;
+    min-height: 300px;
+    flex: 1 1 auto;
+    height: 100%;
+    border-top-left-radius: calc(var(--standart-elem-radius) * 5);
+    display: flex;
+    justify-content: space-between;
+    gap: calc(var(--elements-indent) * 2);
+}
+
+.lot-is-loading {
+    font-size: 20px;
+    min-height: 300px;
+    flex: 1 1 auto;
+    height: 100%;
+    border-top-left-radius: calc(var(--standart-elem-radius) * 5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(var(--elements-indent) * 2);
+}
+
+.lot-is-loading .loading-text {
+    text-align: center;
+    width: 100%;
+    font-size: 50px;
+    transition: all 0.1 ease-in-out;
+    animation: animate-loading-text 2.5s infinite normal;
+}
+
+.lot-container {
+    height: 300px;
+    animation: popup-apear 0.5s ease-in-out;
+}
+
+.status-planned {
+    background-color: rgba(227, 159, 49, 0.429);
+    border-radius: 10px;
+}
+.status-finished {
+    background-color: rgba(227, 64, 49, 0.429);
+    border-radius: 10px;
+}
+.status-active {
+    background-color: rgba(79, 227, 49, 0.429);
+    border-radius: 10px;
+}
+
+.column.left .status-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+}
+.column.left{
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--elements-indent);
+    justify-content: space-between;
+}
+.column.right{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    scrollbar-width: none;
+
+    border-radius:var(--standart-elem-radius);
+    padding: var(--elements-indent);
+}
+.column.right h2{
+    margin-bottom: var(--elements-indent);
+}
+.chat-lot-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--elements-indent);
+}
+
+.bet-buttons-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 250px;
+    gap: var(--elements-indent);
+}
+
+.bet-buttons-container .std-input{
+    text-align: center;
+    height: 70px;
+}

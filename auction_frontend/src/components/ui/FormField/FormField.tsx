@@ -1,21 +1,19 @@
-import './FormField.css';
+import { Ref, forwardRef } from 'react';
 import { IFormFieldsProps } from '@/types';
+import './FormField.css';
 
-const FormField = (props: IFormFieldsProps) => {
-    const {
-        iconComponent,
-        ...inputArgs
-    } = props;
+const FormField = ({ children, ...inputArgs }: IFormFieldsProps, ref: Ref<HTMLInputElement>) => {
     return (
         <div
             className={'form-input-container'}
         >
-            {iconComponent}
+            {children}
             <input
+                ref={ref}
                 {...inputArgs}
             />
         </div>
     );
 };
 
-export default FormField;
+export default forwardRef(FormField);

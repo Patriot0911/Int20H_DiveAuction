@@ -1,9 +1,10 @@
 import { ICircleProps } from '@/types';
+import './Circle.css';
 
 const Circle = ({ size, color, classname, ...props }: ICircleProps) => {
     return <div
         style={{
-            filter: `blur(${props.blurSize})`,
+            filter: `blur(${props.blursize})`,
             width: size,
             height: size,
             position: 'absolute',
@@ -13,7 +14,8 @@ const Circle = ({ size, color, classname, ...props }: ICircleProps) => {
             left: props.left ?? '500px',
             top: props.top ?? '500px'
         }}
-        className={classname}
+        className={'bg-decal-circle'}
+        {...props}
     />;
 };
 

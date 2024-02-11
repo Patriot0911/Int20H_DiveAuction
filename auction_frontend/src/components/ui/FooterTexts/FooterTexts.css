@@ -1,0 +1,17 @@
+.footer-logo-text {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin: 20px;
+    font-size: 30px;
+}
+.footer-big-text {
+    font-size: 17px;
+    line-height: normal;
+}
+.footer-small-text {
+    font-size: 13px;
+}
+.footer-central-text {
+    font-size: 20px;
+}

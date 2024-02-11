@@ -1,34 +1,21 @@
 import BackgroundDecals from '@/components/BackgroundDecals/BackgroundDecals';
+import SignUpContent from '@/components/pageContents/SignUpContent/SignUpContent';
 import signupList from '@/decalLists/signup';
-import { Lobster } from 'next/font/google';
 import { Metadata } from 'next';
-import SignUpForm from '@/components/SignUpForm/SignUpForm';
-import './signup.css';
 
-const lobster = Lobster({
-    subsets: ['latin'],
-    weight: '400'
-});
 export const metadata: Metadata = {
     title: 'Auction Dive | Sign Up!'
 };
 
-const SignUp = () => {
+const SignUpPage = () => {
     return (
         <>
             <BackgroundDecals
                 {...signupList}
             />
-            <section
-                className={
-                    `signup-container ${lobster.className}`
-                }
-            >
-                <h2>Реєстрація</h2>
-                <SignUpForm />
-            </section>
+            <SignUpContent />
         </>
     );
 };
 
-export default SignUp;
+export default SignUpPage;
