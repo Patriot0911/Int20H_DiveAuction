@@ -18,6 +18,7 @@ const LotItem = (item: ILotItemProps) => {
                     href={`/lots/${item.id}`}
                 />
                 <LotItemImage
+                    isFav={item.isFav}
                     id={item.id}
                     photo={item.photos as string}
                     price={item.endPrice}

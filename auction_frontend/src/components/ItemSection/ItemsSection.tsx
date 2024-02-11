@@ -9,11 +9,20 @@ import './ItemSection.css';
 const ItemsSection = ({ type }: IItemsSectionProps) => {
     const [lots, setLots] = useState<ILotData[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [favLots, setFavLots] = useState<number[]>([]);
     useEffect(() => {
         fetchData(type ?? 'auctions')
         .then(response => {
                 setLots(response)
                 setIsLoading(false);
+            }
+        );
+        fetchData('fav')
+        .then(response => {
+                const favs = response.map(
+                    (item: ILotData) => item.auction.id
+                );
+                setFavLots(favs)
             }
         );
     }, []);
@@ -32,6 +41,7 @@ const ItemsSection = ({ type }: IItemsSectionProps) => {
                     Loading...
                 </h1> :
                 <LotList
+                    favs={favLots}
                     lots={lots}
                 />
             }

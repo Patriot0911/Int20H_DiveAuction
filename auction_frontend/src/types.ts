@@ -35,9 +35,7 @@ export interface IBackgroundDecalsProps {
     circles?: ICircleProps[];
 };
 
-export interface IFormFieldsProps extends InputHTMLAttributes<HTMLInputElement> {
-    iconComponent: ReactNode;
-};
+export type IFormFieldsProps = InputHTMLAttributes<HTMLInputElement> & IComponentChildrenProp;
 
 export type TFormSubmitButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & IComponentChildrenProp;
 
@@ -51,10 +49,11 @@ type TFormType = AuthActionsTypes.SignIn | AuthActionsTypes.SignUp;
 export interface IAuthUpInputFieldSettings extends IFormFieldsProps {
     name: string;
     formtype: TFormType;
+    iconComponent: ReactNode;
 };
 
 export interface IAuthUpButtonsProps extends IAuthFormProps{
-    googleHandle: () => void;
+    // googleHandle: () => void;
 };
 
 export interface IAuthFormProps {
@@ -168,6 +167,7 @@ export interface ILotDataInputProps {
 
 export interface ILotListProps {
     lots: ILotData[];
+    favs: number[];
 };
 
 export interface IAuctionLotProps {
@@ -189,6 +189,7 @@ export interface ILotItemImageProps {
     photo: string;
     price: number;
     id: number;
+    isFav?: boolean;
 };
 
 export interface IPhotoWrapperProps {

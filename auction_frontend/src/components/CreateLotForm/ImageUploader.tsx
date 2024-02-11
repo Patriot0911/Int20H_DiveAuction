@@ -32,22 +32,25 @@ const ImageUploader = ({ images, setImages }: IImageUploaderProps) => {
         <div
             className={'img-input'}
         >
-            <div
-                className={'image-list'}
-            >
+            {
+                images.length > 0 &&
+                <div
+                    className={`image-lis`}
+                >
 
-                {
-                    images &&
-                    images.map(
-                        image =>
-                        <img
-                            key={image.imgURL}
-                            src={image.imgURL}
-                            className={"image standart-border"}
-                        />
-                    )
-                }
-            </div>
+                    {
+                        images &&
+                        images.map(
+                            image =>
+                            <img
+                                key={image.imgURL}
+                                src={image.imgURL}
+                                className={"image standart-border"}
+                            />
+                        )
+                    }
+                </div>
+            }
             <div
                 className={'upload-wrapper'}
             >

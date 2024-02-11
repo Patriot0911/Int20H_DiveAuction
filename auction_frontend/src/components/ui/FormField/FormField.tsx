@@ -2,16 +2,12 @@ import { Ref, forwardRef } from 'react';
 import { IFormFieldsProps } from '@/types';
 import './FormField.css';
 
-const FormField = (props: IFormFieldsProps, ref: Ref<HTMLInputElement>) => {
-    const {
-        iconComponent,
-        ...inputArgs
-    } = props;
+const FormField = ({ children, ...inputArgs }: IFormFieldsProps, ref: Ref<HTMLInputElement>) => {
     return (
         <div
             className={'form-input-container'}
         >
-            {iconComponent}
+            {children}
             <input
                 ref={ref}
                 {...inputArgs}

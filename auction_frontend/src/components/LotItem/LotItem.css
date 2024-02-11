@@ -54,6 +54,21 @@
         #a17c938a
     );
 }
+.lot-img-container .fav {
+    user-select: none;
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #512c44c9;
+    padding: 5px;
+    border-radius: 5px;
+    overflow-x: hidden;
+    max-width: 200px;
+    cursor: pointer;
+}
 .lot-img-container .lot-price-container {
     user-select: none;
     position: absolute;

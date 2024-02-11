@@ -3,11 +3,9 @@ import { authUser } from "@/redux/features/user-info-slice";
 import authInputFields from "@/scripts/authInputFields";
 import AuthPopUpContainer from "./AuthPopUpContainer";
 import { FormEvent, useRef, useState } from "react";
-import { APIPathes, API_URL } from "@/scripts/api";
 import FormField from "../ui/FormField/FormField";
 import { useReduxSelector } from "@/redux/store";
 import HasAccountInfo from "./HasAccountInfo";
-import { useRouter } from "next/navigation";
 import AuthUpButtons from "./AuthUpButtons";
 import { redirect } from "next/navigation";
 import { useDispatch } from "react-redux";
@@ -22,19 +20,16 @@ import {
 import './AuthForm.css';
 
 const AuthForm = ({ formtype }: IAuthFormProps) => {
-    const router = useRouter();
     const [errorMsg, setErrorMsg] = useState('');
+    const userNameRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
+    const emailRef = useRef<HTMLInputElement>(null);
+    const dispatch = useDispatch();
     const isAuth = useReduxSelector(
         selctor => selctor.UserInfoReducer.value.isAuth
     );
     if(isAuth)
         return redirect('/');
-
-    const userNameRef = useRef<HTMLInputElement>(null);
-    const passwordRef = useRef<HTMLInputElement>(null);
-    const emailRef = useRef<HTMLInputElement>(null);
-
-    const dispatch = useDispatch();
     const refsList = {
         userName:   userNameRef,
         email:      emailRef,
@@ -69,9 +64,6 @@ const AuthForm = ({ formtype }: IAuthFormProps) => {
             }
         );
     };
-    const googleAuthHandle = () => {
-        router.replace(API_URL + APIPathes['googleAuth'])
-    };
     return (
         <form
             className={'auth-form'}
@@ -85,7 +77,9 @@ const AuthForm = ({ formtype }: IAuthFormProps) => {
                         {...item}
                         key={`formfield-${index}`}
                         ref={refsList[item.name as keyof typeof refsList]}
-                    />
+                    >
+                        {item.iconComponent}
+                    </FormField>
                 )
             }
             <HasAccountInfo
@@ -93,18 +87,15 @@ const AuthForm = ({ formtype }: IAuthFormProps) => {
             />
             {
                 errorMsg.length > 0 &&
-                <PopUp
-                    children={
-                        <AuthPopUpContainer
-                            closeHandle={() => setErrorMsg('')}
-                            errorMsg={errorMsg}
-                        />
-                    }
-                />
+                <PopUp>
+                    <AuthPopUpContainer
+                        closeHandle={() => setErrorMsg('')}
+                        errorMsg={errorMsg}
+                    />
+                </PopUp>
             }
             <AuthUpButtons
                 formtype={formtype}
-                googleHandle={googleAuthHandle}
             />
         </form>
     );

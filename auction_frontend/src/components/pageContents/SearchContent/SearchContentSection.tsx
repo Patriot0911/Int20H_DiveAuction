@@ -40,6 +40,7 @@ const SearchContentSection = () => {
                     Loading...
                 </h1> :
                 <LotList
+                    favs={[]}
                     lots={lots}
                 />
             }
