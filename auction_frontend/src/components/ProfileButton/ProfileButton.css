@@ -59,7 +59,11 @@
     box-shadow: rgba(255, 255, 255, 0.459) 0px 0px 5px;
     transition: all 0.1s ease-in-out;
 }
-.profile:hover .pop-logout, .pop-login {
+.profile:hover .pop-logout {
+    display: flex;
+    animation: popup-apear 0.4s normal;
+}
+.profile:hover .pop-login {
     display: flex;
     animation: popup-apear 0.4s normal;
 }

@@ -1,0 +1,38 @@
+.message-record{
+    max-width: 70%;
+    padding: 10px;
+    margin: var(--elements-indent) 15px;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--standart-elem-radius);
+}
+.message-record .profile-image{
+    margin: 0;
+}
+.message-record .user{
+    margin: 0;
+    align-self: flex-start;
+}
+.message-record .user p{
+    margin: 0 20px 0 20px;
+    justify-self: right;
+    font-size: 25px;
+}
+.message-text{
+
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.user-message{
+    align-self: flex-end;
+}
+.message-record.user-message .user{
+    justify-self: flex-end;
+    align-self: flex-end;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    text-align: right;
+}
+.message-record.user-message{
+
+}

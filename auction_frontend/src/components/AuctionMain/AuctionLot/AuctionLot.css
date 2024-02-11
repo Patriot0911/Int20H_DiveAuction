@@ -1,0 +1,53 @@
+.lot{
+    font-size: 20px;
+    min-height: 300px;
+    flex: 1 1 auto;
+    height: 100%;
+    border-top-left-radius: calc(var(--standart-elem-radius) * 5);
+    display: flex;
+    justify-content: space-between;
+    gap: calc(var(--elements-indent) * 2);
+}
+
+.column.left{
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--elements-indent);
+    justify-content: space-between;
+}
+.column.right{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;/*
+    justify-content: space-between;*/
+
+
+    border-radius:var(--standart-elem-radius);
+    padding: var(--elements-indent);
+}
+.column.right h2{
+    margin-bottom: var(--elements-indent);
+}
+.chat-lot-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--elements-indent);
+}
+
+.bet-buttons-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 250px;
+    gap: var(--elements-indent);
+}
+
+.bet-buttons{
+}
+
+.bet-buttons-container .std-input{
+    text-align: center;
+    height: 70px;
+}

@@ -1,0 +1,26 @@
+
+.history{
+
+    max-height: 1000px;
+    padding: 0;
+    border-top-right-radius: calc(var(--standart-elem-radius) * 5);
+    flex: 0 0 300px;
+    display: flex;
+    scrollbar-width: none;
+    flex-direction: column;
+}
+.history h2{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 4px solid var(--standart-border-color) !important;
+    font-size: 50px;
+}
+
+.history-container{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    overflow: scroll;
+    scrollbar-width: none;
+}
