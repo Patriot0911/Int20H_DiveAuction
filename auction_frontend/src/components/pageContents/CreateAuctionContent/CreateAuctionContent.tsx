@@ -1,7 +1,15 @@
+'use client';
 import CreateLotForm from '@/components/CreateLotForm/CreateLotForm';
+import { useReduxSelector } from '@/redux/store';
+import { redirect } from "next/navigation";
 import './CreateAuctionContent.css';
 
 const CreateAuctionContent = () => {
+    const isAuth = useReduxSelector(
+        selector => selector.UserInfoReducer.value.isAuth
+    );
+    if(!isAuth)
+        return redirect('/');
     return (
         <div
             className={'create-auction-page-container'}

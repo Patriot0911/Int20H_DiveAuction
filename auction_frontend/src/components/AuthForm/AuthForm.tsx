@@ -15,9 +15,9 @@ import {
     IProfileData
 } from "@/types";
 import PopUp from "../PopUp/PopUp";
-import './AuthForm.css';
 import { useReduxSelector } from "@/redux/store";
 import { redirect } from "next/navigation";
+import './AuthForm.css';
 
 const AuthForm = ({ formtype }: IAuthFormProps) => {
     const [errorMsg, setErrorMsg] = useState('');
