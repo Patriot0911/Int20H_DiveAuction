@@ -18,6 +18,7 @@ const CreateLotForm = () => {
     const endDateRef = useRef<HTMLInputElement>(null);
     const titleRef = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLTextAreaElement>(null);
+    const minPriceRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
         fetchData('categories')
         .then(
@@ -32,13 +33,14 @@ const CreateLotForm = () => {
         const startDate = startDateRef.current?.value;
         const endDate = endDateRef.current?.value;
         const cat = catRef.current?.value;
+        const startPrice = minPriceRef.current?.value;
         const formData = new FormData();
         formData.append('title', `"${title}"`);
         formData.append('description', `"${description}"`);
         formData.append('startDate', `"${(new Date(startDate!)).toISOString()}"`);
         formData.append('endDate', `"${(new Date(endDate!)).toISOString()}"`);
         formData.append('categoryId', `${cat}`);
-        formData.append('startPrice', '10');
+        formData.append('startPrice', `${startPrice}`);
         Object.values(images).forEach(
             (image, index) => formData.append(`dron${index+1}`, image.file)
         );
@@ -90,11 +92,13 @@ const CreateLotForm = () => {
                                 cats={cats}
                                 ref={catRef}
                             />
-                            <input placeholder={"мінімальна ставка"}
-                                   type="number"
-                                   min={'50'}
-                                   max={'200000'}
-                                   className={"bet-input input-background input-border"}
+                            <input
+                                placeholder={"мінімальна ставка"}
+                                type={"number"}
+                                min={'50'}
+                                ref={minPriceRef}
+                                max={'200000'}
+                                className={"bet-input input-background input-border"}
                             />
                         </div>
                     </div>
