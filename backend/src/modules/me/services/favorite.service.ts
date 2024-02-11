@@ -43,7 +43,7 @@ export class FavoriteService {
     );
     const res = favAuctions.map((auction, i) => ({
       auction,
-      photos: photos[i],
+      photos: photos[i].map((photo) => photo.url),
     }));
 
     return res;

@@ -29,7 +29,7 @@ export class MyAuctionService {
     );
     const res = myAuctions.map((auction, i) => ({
       auction,
-      photos: photos[i],
+      photos: photos[i].map((photo) => photo.url),
     }));
     return res;
   }
