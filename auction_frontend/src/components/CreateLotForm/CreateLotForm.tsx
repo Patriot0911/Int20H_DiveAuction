@@ -70,38 +70,52 @@ const CreateLotForm = () => {
                 <div
                     className={'input-fields'}
                 >
-                    <div
-                        className={'lot-name-cat'}
-                    >
+
                         <input
-                            className={'lot-name-field'}
+                            className={'lot-name-field input-background input-border'}
                             placeholder={'Назва Лоту'}
                             minLength={5}
                             maxLength={64}
                             ref={titleRef}
                         />
-                        <LotSelectCat
-                            cats={cats}
-                            ref={catRef}
-                        />
+
+                    <div
+                        className={'selections'}
+                    >
+                        <div className="select date">
+                            <LotDataInput
+                                label={'Починається'}
+                                ref={startDateRef}
+
+                            />
+                            <LotDataInput
+                                label={'Закінчится'}
+                                ref={endDateRef}
+                            />
+                        </div>
+                        <div className="select category">
+                            <LotSelectCat
+                                cats={cats}
+                                ref={catRef}
+                            />
+                            <input placeholder={"мінімальна ставка"}
+                                   type="number"
+                                   min={'50'}
+                                   max={'200000'}
+                                   className={"bet-input input-background input-border"}
+                            />
+                        </div>
                     </div>
-                    <LotDataInput
-                        label={'Починається'}
-                        ref={startDateRef}
-                    />
-                    <LotDataInput
-                        label={'Закінчится'}
-                        ref={endDateRef}
-                    />
+
                     <textarea
-                        className={'lot-description-field'}
+                        className={'lot-description-field input-background input-border'}
                         placeholder={'Опис Лоту'}
                         minLength={5}
                         maxLength={2000}
                         ref={descriptionRef}
                     />
                 </div>
-                <CreateLotButtons />
+                <CreateLotButtons/>
             </div>
             <ImageUploader
                 images={images}

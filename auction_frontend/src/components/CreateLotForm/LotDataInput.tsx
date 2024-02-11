@@ -5,7 +5,7 @@ import { Ref, forwardRef } from "react";
 const LotDataInput = ({ label }: ILotDataInputProps, ref: Ref<HTMLInputElement>) => {
     return (
         <div
-            className={'lot-data-selection'}
+            className={'lot-data-selection input-border input-background'}
         >
             <label>{label}:</label>
             <input

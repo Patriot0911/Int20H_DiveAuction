@@ -1,5 +1,6 @@
 import { IImageData, IImageUploaderProps } from "@/types";
 import { FormEvent, useEffect, useState } from "react";
+import {BiSolidImageAdd} from "react-icons/bi";
 
 const ImageUploader = ({ images, setImages }: IImageUploaderProps) => {
     const [file, setFile] = useState<File>();
@@ -34,9 +35,7 @@ const ImageUploader = ({ images, setImages }: IImageUploaderProps) => {
             <div
                 className={'image-list'}
             >
-                <div
-                    id={'top'}
-                />
+
                 {
                     images &&
                     images.map(
@@ -44,6 +43,7 @@ const ImageUploader = ({ images, setImages }: IImageUploaderProps) => {
                         <img
                             key={image.imgURL}
                             src={image.imgURL}
+                            className={"image standart-border"}
                         />
                     )
                 }
@@ -54,7 +54,7 @@ const ImageUploader = ({ images, setImages }: IImageUploaderProps) => {
                 <label
                     htmlFor={'img-selector'}
                 >
-                    Оберіть Зображення
+                    <BiSolidImageAdd size={50}/>
                 </label>
                 <input
                     type={'file'}

@@ -67,13 +67,6 @@ h2{
 }
 .container{
     /*max-height: 800px;*/
-    --standart-elem-radius: 20px;
-    --standart-background: rgba(59, 33, 76, .7);
-    --record-background: rgba(160, 120, 150, .5);
-    --standart-border-color: rgba(255, 255, 255, 0.17);
-    --elements-indent: 15px;
-    --lot-menu-height: 500px;
-    --chat-menu-height: 400px;
 
     margin: 150px auto;
     max-width: 1400px;
