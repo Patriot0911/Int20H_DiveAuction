@@ -30,8 +30,8 @@ export class CreateAuctionDto {
   @IsDate()
   startDate: Date;
 
-  @IsDate()
   @Transform(({ value }) => new Date(value))
+  @IsDate()
   endDate: Date;
 
   @IsNumber()

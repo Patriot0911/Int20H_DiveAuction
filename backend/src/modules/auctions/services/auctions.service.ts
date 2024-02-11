@@ -135,10 +135,12 @@ export class AuctionService {
   }
 
   async getAll(query: GetAuctionsDto) {
-    const { categoryId, ownerId, take, skip, orderBy, order, status } = query;
+    const { categoryId, ownerId, take, skip, orderBy, order, status, title } =
+      query;
     const where: Prisma.AuctionWhereInput = {};
     if (categoryId) where.categoryId = categoryId;
     if (ownerId) where.ownerId = ownerId;
+    if (title) where.title = title;
     if (status) where.status = status as AuctionStatus;
     const auctions = await this.db.auction.findMany({
       where,

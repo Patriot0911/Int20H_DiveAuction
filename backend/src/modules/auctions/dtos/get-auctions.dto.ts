@@ -50,4 +50,8 @@ export class GetAuctionsDto {
   @IsString()
   @IsEnum(['active', 'finished', 'planned'])
   status: string;
+
+  @IsOptional()
+  @IsString()
+  title: string;
 }

@@ -15,6 +15,6 @@ export class ValidatePlannedDates implements ValidatorConstraintInterface {
   }
 
   defaultMessage() {
-    return 'End date should be grater then start date or current date';
+    return 'Start date should be greater or than equal to current date. End date should be greater than start date.';
   }
 }
