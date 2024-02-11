@@ -1,22 +1,31 @@
 import { timmanaFont } from "@/scripts/fonts";
-import { ILotItemProps } from "@/types";
+import { ILotItemImageProps } from "@/types";
+import { useState } from "react";
+import ImagePlaceholder from "../ui/ImagePlaceholder/ImagePlaceholder";
 
-const LotItemImage = (item: ILotItemProps) => {
+
+const LotItemImage = ({ id, photo, price }: ILotItemImageProps) => {
+    const [isValidImg, setImageValid] = useState(true);
     return (
         <section
             className={'lot-img-container'}
         >
-            <img
-                alt={`lot-${item.id}-img`}
-                src={item.image}
-            />
+            {
+                isValidImg ?
+                <img
+                    onError={() => setImageValid(false)}
+                    alt={`lot-${id}-img`}
+                    src={photo}
+                /> :
+                <ImagePlaceholder />
+            }
             <span
                 className={'lot-price-container'}
             >
                 <span
                     className={`lot-price ${timmanaFont.className}`}
                 >
-                    {item.startPrice} $
+                    {price} $
                 </span>
             </span>
         </section>

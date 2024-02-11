@@ -50,8 +50,7 @@ const signIn = async ({ name, ...userInfo }: ICreateProfileSetup) => {
         options
     );
     const data = await response.json();
-    console.log(response);
-    if(data && !response.ok)
+    if(!response.ok)
         return {
             status: response.status,
             message: data.message
@@ -63,8 +62,7 @@ const signIn = async ({ name, ...userInfo }: ICreateProfileSetup) => {
     localStorage.setItem('token', token);
     return {
         status: response.status,
-        message: '',
-        data: user
+        message: user
     };
 };
 

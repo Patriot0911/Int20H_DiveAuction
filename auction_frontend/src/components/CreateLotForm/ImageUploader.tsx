@@ -60,7 +60,7 @@ const ImageUploader = ({ images, setImages }: IImageUploaderProps) => {
                     type={'file'}
                     name={'img'}
                     id={'img-selector'}
-                    accept={'image/*'}
+                    accept={'image/png'}
                     onChange={uploadFileHandle}
                 />
             </div>

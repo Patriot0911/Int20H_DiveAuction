@@ -2,14 +2,15 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import CreateLotButtons from './CreateLotButtons';
 import { ICatData, IImageData } from '@/types';
-import LotSelectCat from './LotSelectCat';
-import LotDataInput from './LotDataInput';
-import fetchData from '@/scripts/api';
-import './CreateLotForm.css';
 import ImageUploader from './ImageUploader';
-import { useReduxSelector } from '@/redux/store';
+import LotSelectCat from './LotSelectCat';
+import { useRouter } from "next/navigation";
+import LotDataInput from './LotDataInput';
+import fetchData, { postAuction } from '@/scripts/api';
+import './CreateLotForm.css';
 
 const CreateLotForm = () => {
+    const router = useRouter();
     const [cats, setCats] = useState<ICatData[]>([]);
     const [images, setImages] = useState<IImageData[]>([]);
     const catRef = useRef<HTMLSelectElement>(null);
@@ -31,32 +32,23 @@ const CreateLotForm = () => {
         const startDate = startDateRef.current?.value;
         const endDate = endDateRef.current?.value;
         const cat = catRef.current?.value;
-        const token = localStorage.getItem('token');
-        const auth = {
-            'Authorization': `Bearer ${token}`
-        };
         const formData = new FormData();
+        formData.append('title', `"${title}"`);
+        formData.append('description', `"${description}"`);
+        formData.append('startDate', `"${(new Date(startDate!)).toISOString()}"`);
+        formData.append('endDate', `"${(new Date(endDate!)).toISOString()}"`);
+        formData.append('categoryId', `${cat}`);
+        formData.append('startPrice', '10');
         Object.values(images).forEach(
             (image, index) => formData.append(`dron${index+1}`, image.file)
         );
-        formData.append('title', `"${title}"`);
-        formData.append('description', `"${description}"`);
-        formData.append('startDate', `"${startDate}"`);
-        formData.append('endDate', `"${endDate}"`);
-        formData.append('categoryId', `${cat}`);
-        formData.append('startPrice', '10');
-        console.log(
-            formData.forEach((item, key) => console.log(key, item))
-        );
-        fetch('http://localhost:8000/api/auctions',
-            {
-                method: 'POST',
-                headers: {
-                    ...auth
-                },
-                body: formData
+        postAuction(formData)
+        .then(
+            (response) => {
+                if(response.status)
+                    return router.replace(response.data);
             }
-        ).then(response => response.json().then(data => console.log(data)))
+        );
     };
 
     return (

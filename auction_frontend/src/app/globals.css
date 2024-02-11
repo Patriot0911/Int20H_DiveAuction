@@ -38,3 +38,17 @@ main {
         opacity: 0;
     }
 }
+@keyframes animate-loading-text {
+    0% {
+        opacity: 0.4;
+        transform: translateY(-15px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 0.4;
+        transform: translateY(-15px);
+    }
+}

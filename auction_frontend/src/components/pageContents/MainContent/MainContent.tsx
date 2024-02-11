@@ -1,5 +1,5 @@
 import BannerSection from './BannerSection';
-import ItemsSection from './ItemsSection';
+import ItemsSection from '../../ItemSection/ItemsSection';
 import './MainContent.css';
 
 const MainContent = () => {
