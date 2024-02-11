@@ -1,6 +1,6 @@
 header {
     padding: 10px;
-
+    backdrop-filter: blur(30px);
     position: fixed;
     box-sizing: border-box;
 

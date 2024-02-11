@@ -1,0 +1,19 @@
+.images-collage{
+    width: 100%;
+}
+.main-image{
+    width: 100%;
+}
+.main-image .photo-item-wrapper{
+    margin-bottom: 5px;
+}
+
+.image-carousel{
+    display: flex;
+    gap: 5px;
+}
+
+img{
+    width:100%;
+    height: fit-content;
+}

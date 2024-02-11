@@ -1,0 +1,27 @@
+.history-record{
+    padding-top: 15px;
+
+    margin: var(--elements-indent) 15px;
+    display: flex;
+    flex-direction: column;
+}
+.bet-count{
+    color: rgb(240, 240, 255);
+    text-shadow: 1px 1px rgba(140, 140, 255, .8);
+    margin-top: 15px;
+    text-align: center;
+    width: 100%;
+    border-top: 2px solid rgba(255,255,255,.1);
+    font-size: 50px;
+    align-self: center;
+}
+.history-record.biggest .bet-count{
+    text-shadow: 1px 1px 10px rgba(255, 140, 140, .8);
+}
+.history-record.biggest{
+    background: rgba(200, 120, 150, .5);
+    box-shadow: 0 20px 40px -20px rgba(255, 140, 140, .7) inset;
+}
+.user p{
+    font-size: 20px;
+}
