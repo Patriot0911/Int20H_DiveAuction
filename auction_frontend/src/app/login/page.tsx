@@ -1,7 +1,7 @@
 import BackgroundDecals from "@/components/BackgroundDecals/BackgroundDecals";
-import { Metadata } from "next";
-import LogInContent from "./LogInContent";
+import LogInContent from "@/components/pageContents/LogInContent/LogInContent";
 import signupList from "@/decalLists/signup";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: 'Auction Dive | Log In!'

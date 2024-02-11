@@ -1,22 +1,24 @@
-import { Metadata } from "next";
-import CreateAuction from "@/components/CreateAuction/CreateAuction";
+import CreateAuctionContent from "@/components/pageContents/CreateAuctionContent/CreateAuctionContent";
 import BackgroundDecals from "@/components/BackgroundDecals/BackgroundDecals";
-import signupList from "@/decalLists/signup";
+import homeList from "@/decalLists/home";
+import { Metadata } from "next";
+import ReduxProvider from "@/redux/provider";
 
 export const metadata: Metadata = {
-    title: 'Auction Dive | My Lots'
+    title: 'Auction Dive | Create Lot'
 };
 
-const MyAuctionsPage = () => {
+const CreateAuctionPage = () => {
     return (
         <>
             <BackgroundDecals
-                {...signupList}
+                {...homeList}
             />
-            <CreateAuction/>
-
+            <ReduxProvider>
+                <CreateAuctionContent/>
+            </ReduxProvider>
         </>
     );
 };
 
-export default MyAuctionsPage;
+export default CreateAuctionPage;

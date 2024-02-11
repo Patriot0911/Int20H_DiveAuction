@@ -1,9 +1,8 @@
-import { Metadata } from "next";
-import CreateAuction from "@/components/CreateAuction/CreateAuction";
-import AuctionLot from "@/components/AuctionMain/AuctionLot/AuctionLot";
 import BackgroundDecals from "@/components/BackgroundDecals/BackgroundDecals";
-import signupList from "@/decalLists/signup";
+import AuctionLot from "@/components/AuctionMain/AuctionLot/AuctionLot";
 import AuctionMain from "@/components/AuctionMain/AuctionMain";
+import signupList from "@/decalLists/signup";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: 'Auction Dive | My Lots'

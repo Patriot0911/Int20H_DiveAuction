@@ -1,0 +1,180 @@
+.create-auction-form {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+.create-auction-form .lot-info-form {
+    width: 100%;
+    height: 100%;
+    grid-column: 1/3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.create-auction-form .img-input {
+    width: 100%;
+    height: 100%;
+    grid-column: 3/4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.lot-info-form .input-fields {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    flex-grow: 1;
+}
+.lot-info-form .input-fields input, textarea {
+    color: white;
+    border: 3px solid var(--standart-border-color);
+    box-sizing: border-box;
+    padding: calc(var(--elements-indent)/2);
+    outline: none;
+    background: rgba(87, 67, 79, 0.641);
+    box-shadow: 0 -150px 200px -200px rgba(0, 0, 0, 0.2) inset;
+    border-radius: var(--standart-img-radius);
+    margin-bottom: var(--elements-indent);
+    margin: 0px 25px;
+    overflow: scroll;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.lot-info-form .input-fields textarea::-webkit-scrollbar {
+    width: 0px;
+    display: none;
+}
+.lot-info-form .input-fields .lot-name-cat {
+    display: grid;
+    margin-right: 25px;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+}
+.lot-info-form .input-fields .lot-name-field {
+    margin-right: 0;
+    height: 50px;
+    font-size: 30px;
+    grid-column: 1/3;
+}
+.lot-info-form .input-fields .lot-description-field {
+    flex-grow: 1;
+    font-size: 20px;
+    display: flex;
+}
+.lot-info-form .buttons, .img-input .upload-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    gap: var(--elements-indent);
+    margin-bottom: 25px;
+    margin-top: 15px;
+}
+.lot-info-form .buttons button {
+    cursor: pointer;
+    flex: 0 1 50%;
+    background: #f3b4ff84;
+    border: 3px solid var(--standart-border-color);
+    opacity: .7;
+    border-radius: var(--standart-img-radius);
+    font-size: 30px;
+    height: 100%;
+    transition: .3s;
+    box-shadow: 0 0 10px gray;
+    color: aliceblue;
+}
+.lot-info-form .buttons button:hover{
+    box-shadow: 0 0 10px #FFE5B4;
+    opacity: 1;
+    flex: 1 1 100%;
+    transition: .3s;
+}
+.lot-name-cat select {
+    background: rgba(87, 67, 79, 0.641);
+    border: 3px solid var(--standart-border-color);
+    border-radius: var(--standart-img-radius);
+    color: #ffffff;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    overflow-x: hidden;
+    font-size: 30px;
+    animation: popup-apear 0.3s ease-in;
+}
+.lot-name-cat option {
+    background-color: rgba(120, 85, 106, 0.641);
+    font-size: 25px;
+    height: fit-content;
+}
+.lot-info-form .lot-data-selection {
+    display: flex;
+    margin-left: 25px;
+    align-items: center;
+}
+.lot-info-form .lot-data-selection label {
+    font-size: 30px;
+}
+.lot-info-form .lot-data-selection input {
+    flex-grow: 1;
+    overflow: hidden;
+}
+.img-input .image-list {
+    background: rgba(87, 67, 79, 0.641);
+    border: 3px solid var(--standart-border-color);
+    box-sizing: border-box;
+    border-radius: var(--standart-img-radius);
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    overflow: scroll;
+    scrollbar-width: none;
+    height: 555px;
+    overflow-y: scroll;
+    position: relative;
+}
+.img-input .image-list img {
+    width: 100%;
+}
+.img-input input {
+    display: none;
+}
+.img-input label {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 16px 0;
+    box-shadow: 0 0 10px gray;
+    background: #f3b4ff84;
+    cursor: pointer;
+    border: 3px solid var(--standart-border-color);
+    box-sizing: border-box;
+    opacity: .7;
+    border-radius: var(--standart-img-radius);
+}
+.img-input label:hover {
+    box-shadow: 0 0 10px #FFE5B4;
+    opacity: 1;
+    transition: .3s;
+}
+#top {
+    --height: 200px;
+    z-index: 255;
+    position: sticky;
+    margin-bottom: calc(var(--height) * -1);
+    top:0;
+    width:100%;
+    height:var(--height);
+    background:
+    linear-gradient(
+        180deg, rgb(87, 67, 79) 30px,
+        rgba(59, 33, 76, 0) 100%
+    );
+}

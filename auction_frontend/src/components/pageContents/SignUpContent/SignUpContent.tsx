@@ -1,6 +1,8 @@
 
 import AuthForm from '@/components/AuthForm/AuthForm';
 import { lobsterFont } from '@/scripts/fonts';
+import { AuthActionsTypes } from '@/types';
+import ReduxProvider from '@/redux/provider';
 import './signup.css';
 
 const SignUpContent = () => {
@@ -11,9 +13,11 @@ const SignUpContent = () => {
             }
         >
             <h2>Реєстрація</h2>
-            <AuthForm
-                register={true}
-            />
+            <ReduxProvider>
+                <AuthForm
+                    formtype={AuthActionsTypes.SignUp}
+                />
+            </ReduxProvider>
         </section>
     );
 };

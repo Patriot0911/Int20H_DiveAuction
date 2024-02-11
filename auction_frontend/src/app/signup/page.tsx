@@ -1,6 +1,6 @@
 import BackgroundDecals from '@/components/BackgroundDecals/BackgroundDecals';
+import SignUpContent from '@/components/pageContents/SignUpContent/SignUpContent';
 import signupList from '@/decalLists/signup';
-import SignUpContent from './SignUpContent';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
