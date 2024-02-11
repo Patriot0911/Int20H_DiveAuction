@@ -32,7 +32,6 @@ const ProfileButton = () => {
                     if(!response)
                         return localStorage.removeItem('token');
                     dispatch(authUser(response));
-                    console.log(response);
                 }
             );
         }
@@ -46,12 +45,12 @@ const ProfileButton = () => {
                 className={'profile-img-container'}
             >
                 {
-                    !profileAvatar || profileAvatar === '/users/default.jpg' ?
+                    !isAuth ?
                     <FaUserSecret
                         {...iconProps}
                     /> :
                     <img
-                        src={getAssetUrl(profileAvatar)}
+                        src={getAssetUrl(profileAvatar!)}
                     />
                 }
             </div>

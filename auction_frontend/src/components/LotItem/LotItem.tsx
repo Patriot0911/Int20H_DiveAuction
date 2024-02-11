@@ -1,8 +1,8 @@
 import { ILotItemProps } from '@/types';
-import Link from 'next/link';
 import LotItemImage from './LotItemImage';
 import LotInfo from './LotInfo/LotInfo';
 import LotItemDate from './LotItemDate';
+import Link from 'next/link';
 import './LotItem.css';
 
 const LotItem = (item: ILotItemProps) => {
@@ -15,10 +15,12 @@ const LotItem = (item: ILotItemProps) => {
             >
                 <Link
                     className={'item-link'}
-                    href={'/'}
+                    href={`/lots/${item.id}`}
                 />
                 <LotItemImage
-                    {...item}
+                    id={item.id}
+                    photo={item.photos as string}
+                    price={item.endPrice}
                 />
                 <LotInfo
                     {...item}

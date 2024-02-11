@@ -46,18 +46,34 @@ main {
         opacity: 0;
     }
 }
-.standart-border{
+
+.standart-border {
     border: 4px solid var(--standart-border-color);
     border-radius:var(--standart-elem-radius);
 }
 
-.standard-background{
+.standard-background {
     background: var(--standart-background);
     background-blend-mode: darken;
     box-shadow:
-            400px
-            -500px
-            500px
-            -500px
-            rgba(51, 30, 36, 0.7) inset;
+        400px
+        -500px
+        500px
+        -500px
+        rgba(51, 30, 36, 0.7) inset;
+}
+
+@keyframes animate-loading-text {
+    0% {
+        opacity: 0.4;
+        transform: translateY(-15px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 0.4;
+        transform: translateY(-15px);
+    }
 }

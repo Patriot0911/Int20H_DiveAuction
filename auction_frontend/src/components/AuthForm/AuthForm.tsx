@@ -1,25 +1,28 @@
 "use client";
-import { FormEvent, useRef, useState } from "react";
-import authInputFields from "@/scripts/authInputFields";
-import FormField from "../ui/FormField/FormField";
-import AuthPopUpContainer from "./AuthPopUpContainer";
-import HasAccountInfo from "./HasAccountInfo";
-import AuthUpButtons from "./AuthUpButtons";
-import authActions from "@/scripts/auth";
-import { useDispatch } from "react-redux";
 import { authUser } from "@/redux/features/user-info-slice";
+import authInputFields from "@/scripts/authInputFields";
+import AuthPopUpContainer from "./AuthPopUpContainer";
+import { FormEvent, useRef, useState } from "react";
+import { APIPathes, API_URL } from "@/scripts/api";
+import FormField from "../ui/FormField/FormField";
+import { useReduxSelector } from "@/redux/store";
+import HasAccountInfo from "./HasAccountInfo";
+import { useRouter } from "next/navigation";
+import AuthUpButtons from "./AuthUpButtons";
+import { redirect } from "next/navigation";
+import { useDispatch } from "react-redux";
+import authActions from "@/scripts/auth";
+import PopUp from "../PopUp/PopUp";
 import {
     AuthActionsTypes,
     IAuthFormProps,
     ICreateProfileSetup,
     IProfileData
 } from "@/types";
-import PopUp from "../PopUp/PopUp";
-import { useReduxSelector } from "@/redux/store";
-import { redirect } from "next/navigation";
 import './AuthForm.css';
 
 const AuthForm = ({ formtype }: IAuthFormProps) => {
+    const router = useRouter();
     const [errorMsg, setErrorMsg] = useState('');
     const isAuth = useReduxSelector(
         selctor => selctor.UserInfoReducer.value.isAuth
@@ -67,7 +70,7 @@ const AuthForm = ({ formtype }: IAuthFormProps) => {
         );
     };
     const googleAuthHandle = () => {
-
+        router.replace(API_URL + APIPathes['googleAuth'])
     };
     return (
         <form

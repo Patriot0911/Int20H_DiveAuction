@@ -21,7 +21,7 @@
     box-shadow: rgba(172, 161, 161, 0.664) 1px 2px 5px 5px;
 }
 .profile-img-container {
-    height: 85%;
+    height: 100%;
 }
 .pop-login, .pop-logout {
     padding: 10px 10px;
@@ -66,4 +66,10 @@
 .profile:hover .pop-login {
     display: flex;
     animation: popup-apear 0.4s normal;
+}
+.profile-img-container img {
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, Dispatch, InputHTMLAttributes, ReactNode, SetStateAction } from "react";
+import { APIPathes } from "./scripts/api";
 
 export enum AuthPathes {
     SignIn = '/signin',
@@ -92,15 +93,16 @@ export interface ILotData {
 export interface ILotItemProps {
     id: number;
     title: string;
-    ownerId?: number;
+    ownerId: number;
     description: string;
-    categoryId?: number;
-    image: string;
+    categoryId: number;
+    photos: string | string[];
     startDate: string;
     status: string;
-    startPrice?: number;
-    endDate?: string;
-    isFav?: boolean;
+    startPrice: number;
+    endPrice: number;
+    endDate: string;
+    isFav: boolean;
 };
 
 export interface ICreateProfileSetup {
@@ -162,4 +164,74 @@ export interface IImageUploaderProps {
 
 export interface ILotDataInputProps {
     label: string;
+};
+
+export interface ILotListProps {
+    lots: ILotData[];
+};
+
+export interface IAuctionLotProps {
+    lot?: ILotItemProps;
+    photos: string[];
+};
+
+export interface ILotInfoProps {
+    lot: ILotItemProps;
+    photos: string[];
+};
+
+export interface ILotTextInfoProps {
+    description: string;
+    title: string;
+};
+
+export interface ILotItemImageProps {
+    photo: string;
+    price: number;
+    id: number;
+};
+
+export interface IPhotoWrapperProps {
+    img?: string;
+};
+
+export interface IImagesCollageProps {
+    photos: string[];
+};
+
+export interface IBidInfo {
+    id: number;
+    photo: string;
+    price: number;
+    userId: number;
+    name: string;
+};
+
+export interface IAuctionHistoryProps {
+    bids: IBidInfo[];
+};
+
+
+export interface IUserChatInfo {
+    email: string;
+    id: number;
+    name: string;
+    photo: string;
+};
+
+export interface IAuctionChatProps {
+    users: IUserChatInfo[];
+};
+
+export interface IIncomeBid {
+    activeUsers: IUserChatInfo[];
+    bid: IBidInfo;
+};
+
+export interface IItemsSectionProps {
+    type?: keyof typeof APIPathes;
+};
+
+export interface IHistoryRecordProps extends IBidInfo {
+    isTheBiggest: boolean;
 };

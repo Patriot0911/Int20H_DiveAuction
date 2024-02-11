@@ -2,14 +2,18 @@
 import CreateLotForm from '@/components/CreateLotForm/CreateLotForm';
 import { useReduxSelector } from '@/redux/store';
 import { redirect } from "next/navigation";
+import { useEffect } from 'react';
 import './CreateAuctionContent.css';
 
 const CreateAuctionContent = () => {
-    // const isAuth = useReduxSelector(
-    //     selector => selector.UserInfoReducer.value.isAuth
-    // );
-    // if(!isAuth)
-    //     return redirect('/');
+    const isAuth = useReduxSelector(
+        selector => selector.UserInfoReducer.value.isAuth
+    );
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if(!isAuth && !token)
+            return redirect('/')
+    }, []);
     return (
         <div
             className={'create-auction-page-container'}
