@@ -18,7 +18,7 @@ model User {
   email         String          @unique @db.VarChar(256)
   name          String          @db.VarChar(50)
   password      String          @db.VarChar(200)
-  photo         String          @default("/users/default.jpg") @db.VarChar(200)
+  photo         String          @default("/users/default.png") @db.VarChar(200)
   auctions      Auction[]
   favorites     Favorite[]
   bids          Bid[]
