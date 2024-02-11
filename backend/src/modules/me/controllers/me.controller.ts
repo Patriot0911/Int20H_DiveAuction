@@ -5,6 +5,7 @@ import { AuctionWinnerService } from '../services/auction-winner.service';
 import { MyAuctionService } from '../services/my-auction.service';
 import { Serialize } from 'src/common/interceptors/serialize.interceptor';
 import { UserSerializationDto } from 'src/modules/auth/dtos/user.dto';
+import { AddFavoriteDto } from '../dtos/add-favorite.dto';
 
 @Controller('/me')
 export class MeController {
@@ -40,7 +41,7 @@ export class MeController {
 
   @Post('/favorites')
   @Authorized()
-  async addFavorite(@Req() req, @Body() { auctionId }: { auctionId: number }) {
+  async addFavorite(@Req() req, @Body() { auctionId }: AddFavoriteDto) {
     const userId = req.user.id;
     await this.favoriteService.addFavorite(userId, auctionId);
     return { message: 'Added to favorites' };
