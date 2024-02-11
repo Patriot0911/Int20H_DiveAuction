@@ -5,13 +5,14 @@
     justify-content: center;
     align-items: flex-start;
 }
+
 .record-background{
     background: var(--record-background);
 }
 .record-border{
     border: 2px solid rgba(255,255,255,.1);
     box-shadow: 5px 5px 20px -5px rgba(0,0,0,0.9);
-    border-radius: 4px;
+    border-radius:calc(var(--standart-elem-radius))
 }
 .profile-image{
     box-shadow: 5px 5px 20px -5px rgba(0,0,0,0.5);
@@ -19,6 +20,10 @@
     margin: 0 10px;
     height: 50px;
     width: 50px;
+}
+.user .profile-image{
+    margin: 10px;
+
 }
 .user p{
     margin: 5px;
