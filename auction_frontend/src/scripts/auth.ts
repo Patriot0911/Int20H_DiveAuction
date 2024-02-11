@@ -14,7 +14,7 @@ const authApiOptions = {
     }
 };
 
-const SignUp = async (userInfo: ICreateProfileSetup) => {
+const signUp = async (userInfo: ICreateProfileSetup) => {
     const options = {
         body: JSON.stringify(userInfo),
         ...authApiOptions
@@ -23,6 +23,11 @@ const SignUp = async (userInfo: ICreateProfileSetup) => {
         AUTH_API + AuthPathes.SignUp,
         options
     );
+    if(response.ok)
+        return {
+            status: response.status,
+            message: ''
+        };
     const data = await response.json();
     if(data)
         return {
@@ -35,7 +40,7 @@ const SignUp = async (userInfo: ICreateProfileSetup) => {
     };
 };
 
-const SignIn = async ({ name, ...userInfo }: ICreateProfileSetup) => {
+const signIn = async ({ name, ...userInfo }: ICreateProfileSetup) => {
     const options = {
         body: JSON.stringify(userInfo),
         ...authApiOptions
@@ -64,8 +69,8 @@ const SignIn = async ({ name, ...userInfo }: ICreateProfileSetup) => {
 };
 
 const authActions: TAuthActions = {
-    [AuthActionsTypes.SignIn]: SignIn,
-    [AuthActionsTypes.SignUp]: SignUp
+    [AuthActionsTypes.SignIn]: signIn,
+    [AuthActionsTypes.SignUp]: signUp
 };
 
 export default authActions;

@@ -2,8 +2,8 @@
 import AuthForm from '@/components/AuthForm/AuthForm';
 import { lobsterFont } from '@/scripts/fonts';
 import { AuthActionsTypes } from '@/types';
-import './signup.css';
 import ReduxProvider from '@/redux/provider';
+import './signup.css';
 
 const SignUpContent = () => {
     return (

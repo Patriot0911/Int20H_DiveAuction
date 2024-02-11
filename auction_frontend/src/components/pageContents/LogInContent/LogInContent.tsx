@@ -1,8 +1,9 @@
+'use client';
 import AuthForm from '@/components/AuthForm/AuthForm';
 import { lobsterFont } from '@/scripts/fonts';
 import { AuthActionsTypes } from '@/types';
-import './login.css';
 import ReduxProvider from '@/redux/provider';
+import './login.css';
 
 const LogInContent = () => {
     return (

@@ -5,7 +5,9 @@ const LotItemDate = ({ createdAt }: ILotItemDateProps) => {
         <span
             className={'lot-date'}
         >
-            Створено: {createdAt}
+            Створено: {
+                new Date(createdAt).toLocaleDateString()
+            }
         </span>
     );
 };

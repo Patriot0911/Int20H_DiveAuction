@@ -1,4 +1,4 @@
-import {lemonFont, lobsterFont} from "@/scripts/fonts";
+import { lemonFont, lobsterFont } from "@/scripts/fonts";
 import FooterMainInfo from './FooterMainInfo';
 import WarningText from "./FooterTexts/WarningText";
 import CopyrightText from "./FooterTexts/CopyrightText";
@@ -12,7 +12,7 @@ const Footer = () => {
         >
             <FooterMainInfo />
             <div
-                className={`bottom-container  ${lobsterFont.className}`}
+                className={`bottom-container ${lobsterFont.className}`}
             >
                 <FooterLinks />
                 <CopyrightText />

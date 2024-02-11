@@ -23,7 +23,7 @@
 .profile-img-container {
     height: 85%;
 }
-.pop-login {
+.pop-login, .pop-logout {
     padding: 10px 10px;
     display: none;
     flex-direction: column;
@@ -43,7 +43,7 @@
     overflow: hidden;
     cursor: default;
 }
-.pop-login a {
+.pop-login a, .logout-button {
     width: 100%;
     color: white;
     text-align: center;
@@ -55,11 +55,11 @@
     padding: 4px;
     border-radius: 4px;
 }
-.pop-login .auth-button:hover {
+.pop-login .pop-logout, .auth-button:hover {
     box-shadow: rgba(255, 255, 255, 0.459) 0px 0px 5px;
     transition: all 0.1s ease-in-out;
 }
-.profile:hover .pop-login {
+.profile:hover .pop-logout, .pop-login {
     display: flex;
     animation: popup-apear 0.4s normal;
 }

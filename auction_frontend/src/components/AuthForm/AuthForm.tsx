@@ -16,16 +16,22 @@ import {
 } from "@/types";
 import PopUp from "../PopUp/PopUp";
 import './AuthForm.css';
+import { useReduxSelector } from "@/redux/store";
+import { redirect } from "next/navigation";
 
 const AuthForm = ({ formtype }: IAuthFormProps) => {
     const [errorMsg, setErrorMsg] = useState('');
+    const isAuth = useReduxSelector(
+        selctor => selctor.UserInfoReducer.value.isAuth
+    );
+    if(isAuth)
+        return redirect('/');
 
     const userNameRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
 
     const dispatch = useDispatch();
-
     const refsList = {
         userName:   userNameRef,
         email:      emailRef,

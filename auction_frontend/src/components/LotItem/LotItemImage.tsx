@@ -16,7 +16,7 @@ const LotItemImage = (item: ILotItemProps) => {
                 <span
                     className={`lot-price ${timmanaFont.className}`}
                 >
-                    {item.price} $
+                    {item.startPrice} $
                 </span>
             </span>
         </section>

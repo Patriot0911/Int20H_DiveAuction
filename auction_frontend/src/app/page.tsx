@@ -2,7 +2,7 @@ import BackgroundDecals from "@/components/BackgroundDecals/BackgroundDecals";
 import MainContent from "@/components/pageContents/MainContent/MainContent";
 import homeList from "@/decalLists/home";
 
-const Home = () => {
+const HomePage = () => {
     return (
         <>
             <BackgroundDecals
@@ -13,4 +13,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default HomePage;

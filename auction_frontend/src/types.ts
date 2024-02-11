@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, Dispatch, InputHTMLAttributes, ReactNode, SetStateAction } from "react";
 
 export enum AuthPathes {
     SignIn = '/signin',
@@ -84,13 +84,22 @@ export interface INavBarListItem extends INavButtonProps {
     logged?: boolean;
 };
 
+export interface ILotData {
+    auction: ILotItemProps;
+    photos: string[];
+};
+
 export interface ILotItemProps {
     id: number;
     title: string;
+    ownerId?: number;
     description: string;
+    categoryId?: number;
     image: string;
-    createdAt: string;
-    price: number;
+    startDate: string;
+    status: string;
+    startPrice?: number;
+    endDate?: string;
     isFav?: boolean;
 };
 
@@ -130,4 +139,27 @@ export interface ILotDescriptionProps {
 
 export interface ILotTitleProps {
     title: string;
+};
+
+export interface ICatData {
+    id: number;
+    name: string;
+};
+
+export interface ILotSelectCatProps {
+    cats: ICatData[];
+};
+
+export interface IImageData {
+    file: File;
+    imgURL: string;
+};
+
+export interface IImageUploaderProps {
+    images: IImageData[];
+    setImages: Dispatch<SetStateAction<IImageData[]>>;
+};
+
+export interface ILotDataInputProps {
+    label: string;
 };
