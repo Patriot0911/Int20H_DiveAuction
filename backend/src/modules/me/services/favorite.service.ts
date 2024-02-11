@@ -42,7 +42,7 @@ export class FavoriteService {
       ),
     );
     const res = favAuctions.map((auction, i) => ({
-      ...auction,
+      auction,
       photos: photos[i],
     }));
 
