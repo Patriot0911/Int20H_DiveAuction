@@ -16,7 +16,6 @@ enum AuctionStatus {
 model User {
   id            Int             @id @default(autoincrement())
   email         String          @unique @db.VarChar(256)
-  verified      Boolean         @default(false)
   name          String          @db.VarChar(50)
   password      String          @db.VarChar(200)
   photo         String          @default("/users/default.jpg") @db.VarChar(200)
@@ -43,8 +42,9 @@ model Auction {
   ownerId       Int             @map("owner_id")
   categoryId    Int             @map("category_id")
   startPrice    Float           @map("start_price")
+  endPrice      Float           @map("end_price") @default(0)
   status        AuctionStatus   @default(planned)
-  startDate     DateTime        @map("start_date") @db.Timestamp
+  startDate     DateTime        @map("start_date") @db.Timestamp @default(now())
   endDate       DateTime        @map("end_date") @db.Timestamp
   title         String          @db.VarChar(100)
   description   String

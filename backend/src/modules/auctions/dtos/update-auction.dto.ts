@@ -1,4 +1,3 @@
-import { Transform } from 'class-transformer';
 import {
   IsDate,
   IsNumber,
@@ -8,21 +7,9 @@ import {
   Length,
   MaxLength,
   Validate,
-  ValidatorConstraint,
 } from 'class-validator';
-
-@ValidatorConstraint({ name: 'PlannedDates', async: false })
-export class ValidatePlannedDates {
-  validate(_: Date, args: any) {
-    const { startDate, endDate } = args.object;
-    if (!startDate && !endDate) return true;
-    return endDate > startDate && startDate > new Date();
-  }
-
-  defaultMessage() {
-    return 'Start date should be in the future and less than end date';
-  }
-}
+import { ValidatePlannedDates } from './planned-date-validator';
+import { Transform } from 'class-transformer';
 
 export class UpdateAuctionDto {
   @IsOptional()
@@ -42,7 +29,6 @@ export class UpdateAuctionDto {
 
   @IsOptional()
   @IsDate()
-  @Transform(({ value }) => new Date(value))
   startDate: Date;
 
   @IsOptional()

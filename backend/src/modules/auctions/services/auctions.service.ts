@@ -8,7 +8,7 @@ import { UpdateAuctionDto } from '../dtos/update-auction.dto';
 import { Auction, AuctionStatus, type Prisma, type User } from '@prisma/client';
 import { GetAuctionsDto } from '../dtos/get-auctions.dto';
 
-const SAFE_TIME_TO_UPDATE = 1000 * 20; // 20 seconds
+const SAFE_DELAY = 1000;
 
 @Injectable()
 export class AuctionService {
@@ -28,8 +28,9 @@ export class AuctionService {
   }
 
   private sheduleAuctionStart(id: number, date: Date) {
-    const job = new CronJob(date, () => {
-      this.db.auction.update({
+    const safeDate = new Date(date.getTime() + SAFE_DELAY);
+    const job = new CronJob(safeDate, async () => {
+      await this.db.auction.update({
         where: { id },
         data: { status: AuctionStatus.active },
       });
@@ -94,19 +95,14 @@ export class AuctionService {
     if (categoryId) toUpdate.category = { connect: { id: categoryId } };
     const auction = await this.db.auction
       .update({
-        where: { id, ownerId: user.id },
+        where: { id, ownerId: user.id, status: AuctionStatus.planned },
         data: toUpdate,
       })
       .catch(() => {
         throw new BadRequestException(
-          'You can update only auctions belonging to you',
+          'You can update only auctions belonging to you that are not started yet',
         );
       });
-    const time = auction.endDate.getTime() - Date.now();
-    if (auction.status !== AuctionStatus.planned || time < SAFE_TIME_TO_UPDATE)
-      throw new BadRequestException(
-        'You cannot update auction that already started or finished',
-      );
     const images = await this.getAuctionImageUrls(id);
     const set = new Set([...photos, ...images]);
     if (set.size > images.length)

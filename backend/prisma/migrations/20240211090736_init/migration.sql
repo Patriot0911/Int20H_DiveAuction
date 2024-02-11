@@ -5,7 +5,6 @@ CREATE TYPE "AuctionStatus" AS ENUM ('planned', 'active', 'finished');
 CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
     "email" VARCHAR(256) NOT NULL,
-    "verified" BOOLEAN NOT NULL DEFAULT false,
     "name" VARCHAR(50) NOT NULL,
     "password" VARCHAR(200) NOT NULL,
     "photo" VARCHAR(200) NOT NULL DEFAULT '/users/default.jpg',
@@ -27,6 +26,7 @@ CREATE TABLE "auctions" (
     "owner_id" INTEGER NOT NULL,
     "category_id" INTEGER NOT NULL,
     "start_price" DOUBLE PRECISION NOT NULL,
+    "end_price" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "status" "AuctionStatus" NOT NULL DEFAULT 'planned',
     "start_date" TIMESTAMP NOT NULL,
     "end_date" TIMESTAMP NOT NULL,

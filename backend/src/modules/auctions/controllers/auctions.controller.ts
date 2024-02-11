@@ -48,7 +48,10 @@ export class AuctionsController {
     const active = await this.bidsService.getActiveByAuction(id);
     // eslint-disable-next-line
     const bids = active.map(({ user, ...rest }) => ({ ...rest }));
-    const activeUsers = active.map(({ user }) => user);
+    const ids = [...new Set(active.map(({ user: { id } }) => id))];
+    const activeUsers = ids.map(
+      (id) => active.find(({ user }) => user.id === id).user,
+    );
     return { auction, images, bids, activeUsers };
   }
 
@@ -56,7 +59,7 @@ export class AuctionsController {
   @Authorized()
   @Upload({
     dir: 'auctions',
-    mimeTypes: ['image/jpeg'],
+    mimeTypes: ['image/jpeg', 'image/jpg', 'image/png'],
     maxUploadedFiles: 5,
   })
   async create(@Req() req, @Body() data: CreateAuctionDto) {
@@ -68,7 +71,7 @@ export class AuctionsController {
   @Authorized()
   @Upload({
     dir: 'auctions',
-    mimeTypes: ['image/jpeg', 'image/jpg'],
+    mimeTypes: ['image/jpeg', 'image/jpg', 'image/png'],
     maxUploadedFiles: 5,
   })
   async update(

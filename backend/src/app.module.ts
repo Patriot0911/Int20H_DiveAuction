@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuctionsModule } from './modules/auctions/auctions.module';
 import { MeModule } from './modules/me/me.module';
+import { MessagesModule } from './modules/messages/messages.module';
 import { serverConfig, OAuthConfig } from './config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
@@ -34,6 +35,7 @@ import { join } from 'path';
     AuctionsModule,
     UsersModule,
     MeModule,
+    MessagesModule,
   ],
   controllers: [],
   providers: [

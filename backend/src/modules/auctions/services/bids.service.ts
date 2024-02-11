@@ -30,9 +30,14 @@ export class BidsService {
           db.auction.findUnique({ where: { id: auctionId } }),
           this.getActiveByAuction(auctionId),
         ]);
-        if (!auction) throw new BadRequestException('Auction not found');
+        if (!auction)
+          throw new BadRequestException(
+            `Auction with id ${auctionId} not found`,
+          );
         if (auction.status !== AuctionStatus.active)
-          throw new BadRequestException('Cannot bid on that auction');
+          throw new BadRequestException(
+            'You cannot bid to planned or finished auction',
+          );
         const [lastBid] = active;
         if (lastBid?.price >= price)
           throw new BadRequestException(
@@ -45,14 +50,16 @@ export class BidsService {
             userId: user.id,
           },
         });
+        await this.db.auction.update({
+          where: { id: auctionId },
+          data: { endPrice: price },
+        });
         const ids = [
           ...new Set(active.map(({ userId }) => userId)).add(user.id),
         ];
         const activeUsers = ids.map((id) => {
           // eslint-disable-next-line
-          const { user: { password, ...rest } } = active.find(
-            ({ user }) => user.id === id,
-          );
+          const { user: { password, ...rest } } = active.find((item) => item.user.id === id) ?? { user };
           return rest;
         });
         return { auctionId, bid, activeUsers };

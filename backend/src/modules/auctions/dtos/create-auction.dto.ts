@@ -1,4 +1,3 @@
-import { Transform } from 'class-transformer';
 import {
   IsDate,
   IsNumber,
@@ -9,7 +8,8 @@ import {
   MaxLength,
   Validate,
 } from 'class-validator';
-import { ValidatePlannedDates } from './update-auction.dto';
+import { ValidatePlannedDates } from './planned-date-validator';
+import { Transform } from 'class-transformer';
 
 export class CreateAuctionDto {
   @IsString()
@@ -25,8 +25,8 @@ export class CreateAuctionDto {
   @IsPositive()
   startPrice: number;
 
+  @IsOptional()
   @IsDate()
-  @Transform(({ value }) => new Date(value))
   startDate: Date;
 
   @IsDate()
