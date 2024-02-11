@@ -16,6 +16,7 @@ footer {
     grid-template-columns: 1fr 100px 1fr;
 }
 .bottom-container {
+    max-width: 1600px;
     margin: 20px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -49,4 +50,9 @@ hr {
     border: none;
     border-top: 15px dotted white;
     width: 20%;
+}
+@media (width < 1000px) {
+    .links{
+        flex-direction: column !important;
+    }
 }
