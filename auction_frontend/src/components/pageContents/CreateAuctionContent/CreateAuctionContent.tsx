@@ -13,7 +13,7 @@ const CreateAuctionContent = () => {
         const token = localStorage.getItem('token');
         if(!isAuth && !token)
             return redirect('/')
-    }, []);;
+    }, []);
     return (
         <div
             className={'create-auction-page-container'}

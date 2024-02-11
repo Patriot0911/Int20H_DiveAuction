@@ -18,6 +18,7 @@ const CreateLotForm = () => {
     const endDateRef = useRef<HTMLInputElement>(null);
     const titleRef = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLTextAreaElement>(null);
+    const minPriceRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
         fetchData('categories')
         .then(
@@ -32,13 +33,14 @@ const CreateLotForm = () => {
         const startDate = startDateRef.current?.value;
         const endDate = endDateRef.current?.value;
         const cat = catRef.current?.value;
+        const startPrice = minPriceRef.current?.value;
         const formData = new FormData();
         formData.append('title', `"${title}"`);
         formData.append('description', `"${description}"`);
         formData.append('startDate', `"${(new Date(startDate!)).toISOString()}"`);
         formData.append('endDate', `"${(new Date(endDate!)).toISOString()}"`);
         formData.append('categoryId', `${cat}`);
-        formData.append('startPrice', '10');
+        formData.append('startPrice', `${startPrice}`);
         Object.values(images).forEach(
             (image, index) => formData.append(`dron${index+1}`, image.file)
         );
@@ -62,38 +64,54 @@ const CreateLotForm = () => {
                 <div
                     className={'input-fields'}
                 >
-                    <div
-                        className={'lot-name-cat'}
-                    >
+
                         <input
-                            className={'lot-name-field'}
+                            className={'lot-name-field input-background input-border'}
                             placeholder={'Назва Лоту'}
                             minLength={5}
                             maxLength={64}
                             ref={titleRef}
                         />
-                        <LotSelectCat
-                            cats={cats}
-                            ref={catRef}
-                        />
+
+                    <div
+                        className={'selections'}
+                    >
+                        <div className="select date">
+                            <LotDataInput
+                                label={'Починається'}
+                                ref={startDateRef}
+
+                            />
+                            <LotDataInput
+                                label={'Закінчится'}
+                                ref={endDateRef}
+                            />
+                        </div>
+                        <div className="select category">
+                            <LotSelectCat
+                                cats={cats}
+                                ref={catRef}
+                            />
+                            <input
+                                placeholder={"мінімальна ставка"}
+                                type={"number"}
+                                min={'50'}
+                                ref={minPriceRef}
+                                max={'200000'}
+                                className={"bet-input input-background input-border"}
+                            />
+                        </div>
                     </div>
-                    <LotDataInput
-                        label={'Починається'}
-                        ref={startDateRef}
-                    />
-                    <LotDataInput
-                        label={'Закінчится'}
-                        ref={endDateRef}
-                    />
+
                     <textarea
-                        className={'lot-description-field'}
+                        className={'lot-description-field input-background input-border'}
                         placeholder={'Опис Лоту'}
                         minLength={5}
                         maxLength={2000}
                         ref={descriptionRef}
                     />
                 </div>
-                <CreateLotButtons />
+                <CreateLotButtons/>
             </div>
             <ImageUploader
                 images={images}

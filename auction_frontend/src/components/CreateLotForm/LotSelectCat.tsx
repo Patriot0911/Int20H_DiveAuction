@@ -5,6 +5,7 @@ import { Ref, forwardRef } from "react";
 const LotSelectCat = ({ cats }: ILotSelectCatProps, ref: Ref<HTMLSelectElement>) => {
     return (
         <select
+            className={"select-category input-background input-border"}
             defaultValue={-1}
             ref={ref}
         >
@@ -13,7 +14,8 @@ const LotSelectCat = ({ cats }: ILotSelectCatProps, ref: Ref<HTMLSelectElement>)
                 hidden
                 value={-1}
             >
-                Оберіть Категорію
+                Оберіть
+                Категорію
             </option>
             {
                 cats.map(
