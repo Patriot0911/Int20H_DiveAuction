@@ -5,7 +5,7 @@ import { DbService } from 'src/modules/db/services/db.service';
 import { updateUploads } from 'src/common/interceptors/upload.interceptor';
 import { CreateAuctionDto } from '../dtos/create-auction.dto';
 import { UpdateAuctionDto } from '../dtos/update-auction.dto';
-import { Auction, AuctionStatus, type Prisma, type User } from '@prisma/client';
+import { Auction, AuctionStatus, Prisma, type User } from '@prisma/client';
 import { GetAuctionsDto } from '../dtos/get-auctions.dto';
 
 const SAFE_DELAY = 1000;

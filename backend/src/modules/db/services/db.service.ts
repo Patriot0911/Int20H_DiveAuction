@@ -3,7 +3,8 @@ import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class DbService extends PrismaClient {
-  onModuleInit() {
-    this.$connect();
+  async onModuleInit() {
+    await this.$connect();
+    this.$queryRaw`CREATE EXTENSION IF NOT EXISTS pg_trgm;`;
   }
 }

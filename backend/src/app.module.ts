@@ -10,14 +10,9 @@ import { AuctionsModule } from './modules/auctions/auctions.module';
 import { MeModule } from './modules/me/me.module';
 import { MessagesModule } from './modules/messages/messages.module';
 import { serverConfig, OAuthConfig } from './config';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(process.cwd(), 'public/uploaded'),
-    }),
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
