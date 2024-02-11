@@ -48,4 +48,13 @@ export class FavoriteService {
 
     return res;
   }
+
+  async addFavorite(userId: number, auctionId: number) {
+    return await this.favRepository.create({
+      data: {
+        userId,
+        auctionId,
+      },
+    });
+  }
 }

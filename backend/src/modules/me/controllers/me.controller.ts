@@ -1,4 +1,4 @@
-import { Get, Controller, Req } from '@nestjs/common';
+import { Get, Controller, Req, Post, Body } from '@nestjs/common';
 import { Authorized } from 'src/common/guards/auth.guard';
 import { FavoriteService } from '../services/favorite.service';
 import { AuctionWinnerService } from '../services/auction-winner.service';
@@ -36,6 +36,14 @@ export class MeController {
     const userId = req.user.id;
     const favorites = this.favoriteService.getFavorites(userId);
     return favorites;
+  }
+
+  @Post('/favorites')
+  @Authorized()
+  async addFavorite(@Req() req, @Body() { auctionId }: { auctionId: number }) {
+    const userId = req.user.id;
+    await this.favoriteService.addFavorite(userId, auctionId);
+    return { message: 'Added to favorites' };
   }
 
   @Get('/won')
