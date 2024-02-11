@@ -26,6 +26,7 @@ export class CreateAuctionDto {
   startPrice: number;
 
   @IsOptional()
+  @Transform(({ value }) => new Date(value))
   @IsDate()
   startDate: Date;
 
