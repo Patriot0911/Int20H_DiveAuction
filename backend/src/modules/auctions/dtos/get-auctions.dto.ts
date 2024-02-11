@@ -53,5 +53,5 @@ export class GetAuctionsDto {
 
   @IsOptional()
   @IsString()
-  title: string;
+  search: string;
 }

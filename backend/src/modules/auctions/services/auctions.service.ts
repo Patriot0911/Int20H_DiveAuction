@@ -9,6 +9,8 @@ import { Auction, AuctionStatus, Prisma, type User } from '@prisma/client';
 import { GetAuctionsDto } from '../dtos/get-auctions.dto';
 
 const SAFE_DELAY = 1000;
+const DEFAULT_MAX_SEARCH = 5;
+const SIMILIARITY_TRESHOLD = 0.3;
 
 @Injectable()
 export class AuctionService {
@@ -135,19 +137,25 @@ export class AuctionService {
   }
 
   async getAll(query: GetAuctionsDto) {
-    const { categoryId, ownerId, take, skip, orderBy, order, status, title } =
+    const { categoryId, ownerId, take, skip, orderBy, order, status, search } =
       query;
-    const where: Prisma.AuctionWhereInput = {};
-    if (categoryId) where.categoryId = categoryId;
-    if (ownerId) where.ownerId = ownerId;
-    if (title) where.title = title;
-    if (status) where.status = status as AuctionStatus;
-    const auctions = await this.db.auction.findMany({
-      where,
-      take,
-      skip,
-      orderBy: { [orderBy]: order },
-    });
+    const auctions: Auction[] = [];
+    if (search) {
+      const data = await this.search(search, take);
+      auctions.push(...data);
+    } else {
+      const where: Prisma.AuctionWhereInput = {};
+      if (categoryId) where.categoryId = categoryId;
+      if (ownerId) where.ownerId = ownerId;
+      if (status) where.status = status as AuctionStatus;
+      const data = await this.db.auction.findMany({
+        where,
+        take,
+        skip,
+        orderBy: { [orderBy]: order },
+      });
+      auctions.push(...data);
+    }
     const photos = await Promise.all(
       auctions.map(({ id }) => this.getAuctionImageUrls(id)),
     );
@@ -156,5 +164,15 @@ export class AuctionService {
 
   async getOne(id: number) {
     return await this.db.auction.findUnique({ where: { id } });
+  }
+
+  async search(input: string, take: number = DEFAULT_MAX_SEARCH) {
+    return (await this.db.$queryRaw`
+      SELECT * 
+      FROM auctions
+      WHERE similarity(title, ${input}) > ${SIMILIARITY_TRESHOLD}
+      ORDER BY similarity(title, ${input}) DESC
+      LIMIT ${take};
+    `) as Auction[];
   }
 }
