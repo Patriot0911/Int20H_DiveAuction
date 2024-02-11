@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "auctions" ALTER COLUMN "start_date" SET DEFAULT CURRENT_TIMESTAMP;

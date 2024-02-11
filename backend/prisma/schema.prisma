@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AuctionStatus {
+  planned
+  active
+  finished
+}
+
+model User {
+  id            Int             @id @default(autoincrement())
+  email         String          @unique @db.VarChar(256)
+  name          String          @db.VarChar(50)
+  password      String          @db.VarChar(200)
+  photo         String          @default("/users/default.png") @db.VarChar(200)
+  auctions      Auction[]
+  favorites     Favorite[]
+  bids          Bid[]
+  messages      Message[]
+  AuctionWinner AuctionWinner[]
+
+  @@map("users")
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique @db.VarChar(50)
+  auctions Auction[]
+
+  @@index([name])
+  @@map("categories")
+}
+
+model Auction {
+  id            Int             @id @default(autoincrement())
+  ownerId       Int             @map("owner_id")
+  categoryId    Int             @map("category_id")
+  startPrice    Float           @map("start_price")
+  endPrice      Float           @map("end_price") @default(0)
+  status        AuctionStatus   @default(planned)
+  startDate     DateTime        @map("start_date") @db.Timestamp @default(now())
+  endDate       DateTime        @map("end_date") @db.Timestamp
+  title         String          @db.VarChar(100)
+  description   String
+  owner         User            @relation(fields: [ownerId], references: [id], onDelete: NoAction)
+  category      Category        @relation(fields: [categoryId], references: [id], onDelete: NoAction)
+  auctionImages AuctionImage[]
+  favorites     Favorite[]
+  bids          Bid[]
+  messages      Message[]
+  AuctionWinner AuctionWinner[]
+
+  @@index([ownerId])
+  @@index([categoryId])
+  @@map("auctions")
+}
+
+model AuctionImage {
+  id        Int     @id @default(autoincrement())
+  auctionId Int     @map("auction_id")
+  url       String  @db.VarChar(200)
+  auction   Auction @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+
+  @@index([auctionId])
+  @@map("auction_images")
+}
+
+model Favorite {
+  userId    Int     @map("user_id")
+  auctionId Int     @map("auction_id")
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  auction   Auction @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+
+  @@id([userId, auctionId])
+  @@map("favorites")
+}
+
+model Bid {
+  id        Int      @id @default(autoincrement())
+  auctionId Int      @map("auction_id")
+  userId    Int      @map("user_id")
+  price     Float
+  createdAt DateTime @default(now()) @db.Timestamp
+  auction   Auction  @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([auctionId, userId])
+  @@map("bids")
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  auctionId Int      @map("auction_id")
+  userId    Int      @map("user_id")
+  content   String   @db.VarChar(1000)
+  createdAt DateTime @default(now()) @db.Timestamp
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  auction   Auction  @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+
+  @@index([auctionId])
+  @@map("messages")
+}
+
+model AuctionWinner {
+  userId    Int
+  auctionId Int
+  user      User    @relation(fields: [userId], references: [id])
+  auction   Auction @relation(fields: [auctionId], references: [id])
+
+  @@id([userId, auctionId])
+  @@map("auction_winners")
+}
