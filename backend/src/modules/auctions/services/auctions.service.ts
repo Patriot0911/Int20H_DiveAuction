@@ -167,12 +167,33 @@ export class AuctionService {
   }
 
   async search(input: string, take: number = DEFAULT_MAX_SEARCH) {
-    return (await this.db.$queryRaw`
+    const res = (await this.db.$queryRaw`
       SELECT * 
       FROM auctions
       WHERE similarity(title, ${input}) > ${SIMILIARITY_TRESHOLD}
       ORDER BY similarity(title, ${input}) DESC
       LIMIT ${take};
-    `) as Auction[];
+    `) as any[];
+    return res.map(
+      ({
+        start_date,
+        end_date,
+        start_price,
+        end_price,
+        category_id,
+        owner_id,
+        ...rest
+      }) => {
+        return {
+          ...rest,
+          startDate: start_date,
+          endDate: end_date,
+          startPrice: start_price,
+          endPrice: end_price,
+          categoryId: category_id,
+          ownerId: owner_id,
+        };
+      },
+    ) as Auction[];
   }
 }
