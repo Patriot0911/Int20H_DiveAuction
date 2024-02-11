@@ -78,6 +78,7 @@ export class AuctionService {
     const auction = await this.db.auction.create({
       data: {
         ...fields,
+        endPrice: fields.startPrice,
         owner: { connect: { id } },
         category: { connect: { id: categoryId } },
       },

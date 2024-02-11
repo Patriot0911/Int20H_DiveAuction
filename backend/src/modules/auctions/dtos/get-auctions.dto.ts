@@ -31,7 +31,15 @@ export class GetAuctionsDto {
 
   @IsOptional()
   @IsString()
-  @IsEnum(['id', 'startDate', 'endDate', 'startPrice', 'title', 'createdAt'])
+  @IsEnum([
+    'id',
+    'startDate',
+    'endDate',
+    'startPrice',
+    'endPrice',
+    'title',
+    'createdAt',
+  ])
   orderBy: string = 'id';
 
   @IsOptional()
