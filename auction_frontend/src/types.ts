@@ -228,10 +228,6 @@ export interface IIncomeBid {
     bid: IBidInfo;
 };
 
-export interface IItemsSectionProps {
-    type?: keyof typeof APIPathes;
-};
-
 export interface IHistoryRecordProps extends IBidInfo {
     isTheBiggest: boolean;
 };

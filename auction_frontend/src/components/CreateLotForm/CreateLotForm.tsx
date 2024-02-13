@@ -47,7 +47,7 @@ const CreateLotForm = () => {
         postAuction(formData)
         .then(
             (response) => {
-                if(response.status)
+                if(response)
                     return router.replace(response.data);
             }
         );
@@ -65,13 +65,13 @@ const CreateLotForm = () => {
                     className={'input-fields'}
                 >
 
-                        <input
-                            className={'lot-name-field input-background input-border'}
-                            placeholder={'Назва Лоту'}
-                            minLength={5}
-                            maxLength={64}
-                            ref={titleRef}
-                        />
+                    <input
+                        className={'lot-name-field input-background input-border'}
+                        placeholder={'Назва Лоту'}
+                        minLength={5}
+                        maxLength={64}
+                        ref={titleRef}
+                    />
 
                     <div
                         className={'selections'}

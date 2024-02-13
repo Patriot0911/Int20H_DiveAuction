@@ -1,5 +1,5 @@
 import { IBackgroundDecalsProps } from '@/types';
-import Circle from '../Circle/Circle';
+import Circle from '../ui/Circle/Circle';
 import './BackgroundDecals.css';
 
 const BackgroundDecals = ({ circles }: IBackgroundDecalsProps) => {
