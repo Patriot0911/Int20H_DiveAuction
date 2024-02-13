@@ -1,0 +1,17 @@
+.lot-info .lot-title {
+    margin: 0;
+    margin-bottom: 8px;
+    max-height: 60px;
+    font-size: 22px;
+    overflow-y: hidden;
+}
+.lot-info {
+    margin-left: 15px;
+    margin-right: 8px;
+    display: flex;
+    flex-direction: column;
+}
+.lot-info .lot-item-description {
+    text-indent: 20px;
+    font-size: 19px;
+}

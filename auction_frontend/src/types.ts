@@ -95,13 +95,13 @@ export interface ILotItemProps {
     ownerId: number;
     description: string;
     categoryId: number;
-    photos: string | string[];
+    photos?: string[];
     startDate: string;
     status: string;
     startPrice: number;
     endPrice: number;
     endDate: string;
-    isFav: boolean;
+    isFav?: boolean;
 };
 
 export interface ICreateProfileSetup {
@@ -167,7 +167,6 @@ export interface ILotDataInputProps {
 
 export interface ILotListProps {
     lots: ILotData[];
-    favs: number[];
 };
 
 export interface IAuctionLotProps {
@@ -186,7 +185,7 @@ export interface ILotTextInfoProps {
 };
 
 export interface ILotItemImageProps {
-    photo: string;
+    photos?: string[];
     price: number;
     id: number;
     isFav?: boolean;
@@ -235,4 +234,8 @@ export interface IItemsSectionProps {
 
 export interface IHistoryRecordProps extends IBidInfo {
     isTheBiggest: boolean;
+};
+
+export interface ILotPriceProps {
+    price: number;
 };

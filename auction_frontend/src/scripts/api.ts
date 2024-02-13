@@ -29,7 +29,10 @@ const fetchData = async (url: keyof typeof APIPathes) => {
         return data;
     };
     const response = await fetch(API_URL + path);
+    if(!response)
+        return;
     const data = await response.json();
+    console.log(response);
     return data;
 };
 export const fetchLot = async (lotId: number) => {

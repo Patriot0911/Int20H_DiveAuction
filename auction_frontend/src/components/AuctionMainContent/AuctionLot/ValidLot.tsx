@@ -104,8 +104,7 @@ const ValidLot = ({ lot, photos }: ILotInfoProps) => {
                 </form>
             </div>
             <LotInfo
-                description={lot.description}
-                title={lot.description}
+                {...lot}
             />
         </>
     );

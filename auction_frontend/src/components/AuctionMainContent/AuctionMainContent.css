@@ -8,7 +8,7 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-p, h2{
+.container p, h2{
     margin: 0;
     padding: 0;
 }
@@ -72,7 +72,7 @@ button.std-input:active{
     box-shadow: 0 0 20px rgba(255, 200, 200, .1);
     background-blend-mode: screen;
 }
-h2 {
+.container h2 {
     text-align: center;
 }
 .container {

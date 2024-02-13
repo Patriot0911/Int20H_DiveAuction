@@ -1,6 +1,7 @@
 import { ILotItemProps } from "@/types";
 import LotDescription from "./LotDescription";
 import LotTitle from "./LotTitle";
+import './LotInfo.css';
 
 const LotInfo = (item: ILotItemProps) => {
     return (
