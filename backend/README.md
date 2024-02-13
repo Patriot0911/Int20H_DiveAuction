@@ -3,6 +3,9 @@
 ### Requirments:
 - Node.js (18v or later)
 - PostgresSQL (15v or later)
+- pg_trgm module (for search engine)
+
+"pg_trgm module" should be installed after migration. At the moment, auto installation is not provided.
 
 ### Setting environment variables:
 ```shell
