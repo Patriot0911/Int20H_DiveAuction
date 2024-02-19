@@ -6,7 +6,7 @@ import ImageUploader from './ImageUploader';
 import LotSelectCat from './LotSelectCat';
 import { useRouter } from "next/navigation";
 import LotDataInput from './LotDataInput';
-import fetchData, { postAuction } from '@/scripts/api';
+import { fetchCats, postAuction } from '@/scripts/api';
 import './CreateLotForm.css';
 
 const CreateLotForm = () => {
@@ -20,7 +20,7 @@ const CreateLotForm = () => {
     const descriptionRef = useRef<HTMLTextAreaElement>(null);
     const minPriceRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
-        fetchData('categories')
+        fetchCats()
         .then(
             data => setCats(data)
         );
@@ -47,7 +47,7 @@ const CreateLotForm = () => {
         postAuction(formData)
         .then(
             (response) => {
-                if(response.status)
+                if(response)
                     return router.replace(response.data);
             }
         );
@@ -65,13 +65,13 @@ const CreateLotForm = () => {
                     className={'input-fields'}
                 >
 
-                        <input
-                            className={'lot-name-field input-background input-border'}
-                            placeholder={'Назва Лоту'}
-                            minLength={5}
-                            maxLength={64}
-                            ref={titleRef}
-                        />
+                    <input
+                        className={'lot-name-field input-background input-border'}
+                        placeholder={'Назва Лоту'}
+                        minLength={5}
+                        maxLength={64}
+                        ref={titleRef}
+                    />
 
                     <div
                         className={'selections'}

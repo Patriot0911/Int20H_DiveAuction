@@ -1,4 +1,4 @@
-import { Get, Controller, Req, Post, Body } from '@nestjs/common';
+import { Get, Controller, Req, Post, Body, Delete } from '@nestjs/common';
 import { Authorized } from 'src/common/guards/auth.guard';
 import { FavoriteService } from '../services/favorite.service';
 import { AuctionWinnerService } from '../services/auction-winner.service';
@@ -45,6 +45,14 @@ export class MeController {
     const userId = req.user.id;
     await this.favoriteService.addFavorite(userId, auctionId);
     return { message: 'Added to favorites' };
+  }
+
+  @Delete('/favorites')
+  @Authorized()
+  async deleteFavorite(@Req() req, @Body() { auctionId }: AddFavoriteDto) {
+    const userId = req.user.id;
+    await this.favoriteService.deleteFavorite(userId, auctionId);
+    return { message: 'Deleted from favorites' };
   }
 
   @Get('/won')

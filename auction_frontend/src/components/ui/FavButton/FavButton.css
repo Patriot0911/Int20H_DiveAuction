@@ -1,0 +1,26 @@
+.fav-button {
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #8a396dc9;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.4s;
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.576);
+    border-radius: 50%;
+    overflow: hidden;
+}
+.fav-button:hover {
+    box-shadow: 0px 0px 8px 2px black;
+}
+.fav-button .fav-icon {
+    animation: fav-icon-apear 0.3s ease-in-out;
+}
+@keyframes fav-icon-apear {
+    0% {
+        opacity: 0;
+        scale: 0.8;
+    }
+}

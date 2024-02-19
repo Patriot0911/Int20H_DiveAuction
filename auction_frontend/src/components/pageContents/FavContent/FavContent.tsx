@@ -1,4 +1,4 @@
-import ItemsSection from '@/components/ItemSection/ItemsSection';
+import FavItemsSection from './FavItemsSection';
 import './FavContent.css';
 
 const FavContent = () => {
@@ -6,9 +6,7 @@ const FavContent = () => {
         <div
             className={'fav-page-container'}
         >
-            <ItemsSection
-                type={'fav'}
-            />
+            <FavItemsSection />
         </div>
     );
 };

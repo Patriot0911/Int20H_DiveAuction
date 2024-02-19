@@ -1,9 +1,8 @@
 import NoLots from "../pageContents/MainContent/NoLots";
-import { getAssetUrl } from "@/scripts/api";
 import LotItem from "../LotItem/LotItem";
 import { ILotListProps } from "@/types";
 
-const LotList = ({ lots, favs }: ILotListProps) => {
+const LotList = ({ lots }: ILotListProps) => {
     return (
         <>
             {
@@ -14,8 +13,7 @@ const LotList = ({ lots, favs }: ILotListProps) => {
                         {
                             ...item.auction
                         }
-                        isFav={favs.includes(item.auction.id)}
-                        photos={item.photos && getAssetUrl(item.photos[0])}
+                        photos={item.photos}
                         key={`item-lot-${index}`}
                     />
                 ) :

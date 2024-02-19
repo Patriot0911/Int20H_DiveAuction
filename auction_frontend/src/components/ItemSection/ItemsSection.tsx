@@ -1,30 +1,21 @@
 "use client";
+import { fetchAllItems } from "@/scripts/utils";
 import { lobsterFont } from "@/scripts/fonts";
 import { useEffect, useState } from "react";
-import fetchData from "@/scripts/api";
-import { IItemsSectionProps, ILotData } from "@/types";
+import { useParams } from "next/navigation";
+import { ILotData } from "@/types";
 import LotList from "./LotList";
 import './ItemSection.css';
 
-const ItemsSection = ({ type }: IItemsSectionProps) => {
+const ItemsSection = () => {
     const [lots, setLots] = useState<ILotData[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [favLots, setFavLots] = useState<number[]>([]);
+    const { search } = useParams();
     useEffect(() => {
-        fetchData(type ?? 'auctions')
-        .then(response => {
-                setLots(response)
-                setIsLoading(false);
-            }
-        );
-        fetchData('fav')
-        .then(response => {
-                const favs = response.map(
-                    (item: ILotData) => item.auction.id
-                );
-                setFavLots(favs)
-            }
-        );
+        const searchOptions = {
+            search: (search && Array.isArray(search)) ? search[0] : search
+        };
+        fetchAllItems(setLots, setIsLoading, searchOptions);
     }, []);
     return (
         <section
@@ -41,7 +32,6 @@ const ItemsSection = ({ type }: IItemsSectionProps) => {
                     Loading...
                 </h1> :
                 <LotList
-                    favs={favLots}
                     lots={lots}
                 />
             }

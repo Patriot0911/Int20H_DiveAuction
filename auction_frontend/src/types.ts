@@ -95,13 +95,13 @@ export interface ILotItemProps {
     ownerId: number;
     description: string;
     categoryId: number;
-    photos: string | string[];
+    photos?: string[];
     startDate: string;
     status: string;
     startPrice: number;
     endPrice: number;
     endDate: string;
-    isFav: boolean;
+    isFav?: boolean;
 };
 
 export interface ICreateProfileSetup {
@@ -167,7 +167,6 @@ export interface ILotDataInputProps {
 
 export interface ILotListProps {
     lots: ILotData[];
-    favs: number[];
 };
 
 export interface IAuctionLotProps {
@@ -186,7 +185,7 @@ export interface ILotTextInfoProps {
 };
 
 export interface ILotItemImageProps {
-    photo: string;
+    photos?: string[];
     price: number;
     id: number;
     isFav?: boolean;
@@ -229,10 +228,19 @@ export interface IIncomeBid {
     bid: IBidInfo;
 };
 
-export interface IItemsSectionProps {
-    type?: keyof typeof APIPathes;
-};
-
 export interface IHistoryRecordProps extends IBidInfo {
     isTheBiggest: boolean;
 };
+
+export interface ILotPriceProps {
+    price: number;
+};
+
+export interface ISearchOptions {
+    search?: string;
+};
+export type TSetLotsFunc = (lots: ILotData[]) => void;
+export type TSetIsLoadingFunc = (state: boolean) => void;
+
+
+export type TSearchOptionsStringProps = [string, string][];

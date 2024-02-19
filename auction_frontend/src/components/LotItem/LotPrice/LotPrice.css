@@ -1,0 +1,18 @@
+.lot-img-container .lot-price-container {
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+    background-color: #512c44c9;
+    border: 1px solid #A17C93;
+    padding: 5px;
+    border-radius: 5px;
+    overflow-x: hidden;
+    max-width: 200px;
+}
+.lot-img-container .lot-price-container .lot-price {
+    line-height: 10px;
+    font-size: 23px;
+}
+.lot-img-container .lot-price-container::-webkit-scrollbar {
+    width: 0;
+}

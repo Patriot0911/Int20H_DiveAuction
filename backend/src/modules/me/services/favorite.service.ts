@@ -57,4 +57,15 @@ export class FavoriteService {
       },
     });
   }
+
+  async deleteFavorite(userId: number, auctionId: number) {
+    return await this.favRepository.delete({
+      where: {
+        userId_auctionId: {
+          auctionId,
+          userId
+        }
+      }
+    });
+  }
 }
