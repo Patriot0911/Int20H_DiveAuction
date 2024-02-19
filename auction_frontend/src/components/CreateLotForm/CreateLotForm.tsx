@@ -6,7 +6,7 @@ import ImageUploader from './ImageUploader';
 import LotSelectCat from './LotSelectCat';
 import { useRouter } from "next/navigation";
 import LotDataInput from './LotDataInput';
-import fetchData, { postAuction } from '@/scripts/api';
+import { fetchCats, postAuction } from '@/scripts/api';
 import './CreateLotForm.css';
 
 const CreateLotForm = () => {
@@ -20,7 +20,7 @@ const CreateLotForm = () => {
     const descriptionRef = useRef<HTMLTextAreaElement>(null);
     const minPriceRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
-        fetchData('categories')
+        fetchCats()
         .then(
             data => setCats(data)
         );

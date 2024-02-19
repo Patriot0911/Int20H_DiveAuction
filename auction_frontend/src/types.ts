@@ -235,3 +235,12 @@ export interface IHistoryRecordProps extends IBidInfo {
 export interface ILotPriceProps {
     price: number;
 };
+
+export interface ISearchOptions {
+    search?: string;
+};
+export type TSetLotsFunc = (lots: ILotData[]) => void;
+export type TSetIsLoadingFunc = (state: boolean) => void;
+
+
+export type TSearchOptionsStringProps = [string, string][];

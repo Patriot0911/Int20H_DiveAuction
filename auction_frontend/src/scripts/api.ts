@@ -1,10 +1,10 @@
-import { ILotData } from "@/types";
+import { ILotData, ISearchOptions, TSearchOptionsStringProps } from "@/types";
 
 export const SERVER_URL = 'http://localhost:8000';
 export const API_URL = `${SERVER_URL}/api/`;
 
 export enum APIPathes {
-    categories      = 'categories',
+    categories      = '/api/categories',
     profile         = '/api/me',
     fav             = '/api/me/favorites',
     auctions        = '/api/auctions',
@@ -12,8 +12,22 @@ export enum APIPathes {
     googleAuth      = 'auth/oauth/google'
 };
 
-export const fetchLots = async () => {
-    const path = SERVER_URL + APIPathes['auctions'];
+const searchOptionsString = (searchArray: TSearchOptionsStringProps, strBuffer = '', index = 0): string => {
+    if(searchArray[index] && searchArray[index][1]) {
+        const searchData = searchArray[index];
+        const newSearchString = strBuffer.concat(`?${searchData[0]}=${searchData[1]}`);
+        return searchOptionsString(searchArray, newSearchString, index+1);
+    };
+    return strBuffer;
+};
+
+export const fetchLots = async (searchOptions?: ISearchOptions) => {
+    const lotFilters = searchOptions && searchOptionsString(Object.entries(searchOptions));
+    const path = [
+        SERVER_URL,
+        APIPathes['auctions'],
+        lotFilters
+    ].join('');
     const response = await fetch(path);
     if(!response.ok)
         return;
@@ -40,29 +54,17 @@ export const fetchFavs = async (): Promise<ILotData[]> => {
         return [];
     return data;
 };
-
-const fetchData = async (url: keyof typeof APIPathes) => { // replace & remove
-    const path = APIPathes[url];
-    if(path.startsWith(APIPathes.profile)) {
-        const token = localStorage.getItem('token');
-        if(!token)
-            return;
-        const auth = {
-            'Authorization': `Bearer ${token}`
-        };
-        const response = await fetch(API_URL + path, {
-            headers: {
-                'Content-Type': 'application/json',
-                ...auth
-            }
-        });
-        const data = await response.json();
-        return data;
-    };
-    const response = await fetch(API_URL + path);
-    if(!response)
+export const fetchCats = async () => {
+    const path = [
+        SERVER_URL,
+        APIPathes['categories']
+    ].join('');
+    const response = await fetch(path);
+    if(!response.ok)
         return;
     const data = await response.json();
+    if(!data)
+        return;
     return data;
 };
 export const fetchLot = async (lotId: number) => {
@@ -119,5 +121,3 @@ export const postAuction = async (formData: FormData) => {
         data: data && `/lots/${data.auction.id}`
     };
 };
-
-export default fetchData;

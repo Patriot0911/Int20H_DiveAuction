@@ -1,12 +1,12 @@
+import ItemsSection from '@/components/ItemSection/ItemsSection';
 import './SearchContent.css';
-import SearchContentSection from './SearchContentSection';
 
 const SearchContent = () => {
     return (
         <div
             className={'search-page-container'}
         >
-            <SearchContentSection />
+            <ItemsSection />
         </div>
     );
 };
